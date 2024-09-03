@@ -1,0 +1,17 @@
+#ide specific
+.idea/
+
+node_modules
+public
+reports
+*.log
+.DS_Store
+public/js/bundle.js
+.yardoc
+doc
+apps/**/translations/en
+dump.rdb
+coverage
+.nyc_output
+codecept.conf.js
+.env
