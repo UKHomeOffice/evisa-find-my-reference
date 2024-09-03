@@ -18,19 +18,19 @@ module.exports = {
     '/name': {
       next: '/sex',
       fields: ['given-names', 'surname'],
-      backLink: " " // workaround to show Back link to the root of the app
+      backLink: ' ' // workaround to show Back link to the root of the app
     },
     '/sex': {
       next: '/nationality',
-      fields: []
+      fields: ['sex']
     },
     '/nationality': {
       next: '/date-birth',
-      fields: []
+      fields: ['country-of-nationality']
     },
     '/date-birth': {
       next: '/upload-photo',
-      fields: []
+      fields: ['dob']
     },
     '/upload-photo': {
       next: '/any-other-information',

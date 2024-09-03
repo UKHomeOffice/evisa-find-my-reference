@@ -12,7 +12,7 @@
   "nationality": {
     "header": "What is your country of nationality?"
   },
-  "date-birth/": {
+  "date-birth": {
     "header": "What is your date of birth?"
   },
   "upload-photo": {
