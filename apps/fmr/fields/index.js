@@ -12,8 +12,11 @@
  * @returns {boolean} - Returns true if the value is valid, otherwise false.
  */
 function validateText(value) {
-    const regex = /^[a-zA-Z\s'-]+$/;
-    return regex.test(value);
+    if (value?.length > 0) {
+        const regex = /^[a-zA-Z\s'-]+$/;
+        return regex.test(value);    
+    }
+    return true;
 }
 
 module.exports = {
@@ -26,7 +29,7 @@ module.exports = {
     },
     "surname": {
         mixin: 'input-text',
-        validate: [validateText],
+        validate: ['required', validateText],
         className: ['govuk-input', 'govuk-!-width-two-thirds'],
         labelClassName: 'govuk-label--s'
     }
