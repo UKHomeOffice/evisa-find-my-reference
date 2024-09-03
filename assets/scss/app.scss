@@ -1,15 +1,5 @@
 @import "hof/frontend/themes/gov-uk/styles/govuk";
 
-h2 {
-  @extend .govuk-heading-m;
-  margin-top: 40px;
-}
-
-h3 {
-  @extend .govuk-heading-s;
-  margin-top: 20px;
-}
-
 ul {
   @extend .govuk-list--bullet;
 }
@@ -147,10 +137,6 @@ textarea {
 .govuk-button {
   margin-right: 0.5rem;
   margin-top: 30px;
-}
-
-.govuk-hint {
-  margin-top: 1rem;
 }
 
 .govuk-caption-l {

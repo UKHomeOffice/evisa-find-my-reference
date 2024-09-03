@@ -11,25 +11,28 @@ module.exports = {
     '/': {
       next: '/name',
       fields: [],
-      template: 'start'
+      template: 'start',
+      sidepanel: true,
+      fullwidth: true
     },
     '/name': {
       next: '/sex',
-      fields: []
+      fields: ['given-names', 'surname'],
+      backLink: " " // workaround to show Back link to the root of the app
     },
     '/sex': {
       next: '/nationality',
       fields: []
     },
     '/nationality': {
-      next: '/date-birth/',
+      next: '/date-birth',
       fields: []
     },
-    '/date-birth/': {
-      next: '/upload-photo/',
+    '/date-birth': {
+      next: '/upload-photo',
       fields: []
     },
-    '/upload-photo/': {
+    '/upload-photo': {
       next: '/any-other-information',
       fields: []
     },
