@@ -5,7 +5,7 @@
   "name": {
     "header": "What is your name?"
   },
-  "sex/": {
+  "sex": {
     "header": "What is your sex?"
   },
   "nationality": {
