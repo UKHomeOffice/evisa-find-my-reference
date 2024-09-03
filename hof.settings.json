@@ -1,0 +1,15 @@
+{
+  "appName": "Request your reference number to get access to your eVisa",
+  "theme": "govUK",
+  "behaviours": [
+    "hof/components/clear-session"
+  ],
+  "translations": "./apps/fmr/translations",
+  "routes": [
+    "./apps/fmr"
+  ],
+  "session": {
+    "name": "fmr.hof.sid"
+  },
+  "getAccessibility": false
+}
