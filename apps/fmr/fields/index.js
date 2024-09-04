@@ -21,6 +21,7 @@ function validateText(value) {
   return true;
 }
 
+
 /**
  * Validation rule to exclude the value 'United Kingdom'.
  * @param {string} value - The value to be checked.

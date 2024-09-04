@@ -1,7 +1,3 @@
-const hof = require('hof');
-const Summary = hof.components.summary;
-const clearSession = require('./behaviours/clear-session');
-
 module.exports = {
   name: 'fmr',
   baseUrl: '/',
@@ -49,9 +45,7 @@ module.exports = {
       fields: []
     },
     '/check-answers': {
-      next: '/request-sent',
-      fields: [],
-      behaviours: [Summary, clearSession]
+      next: '/request-sent'
     },
     '/request-sent': {
     }
