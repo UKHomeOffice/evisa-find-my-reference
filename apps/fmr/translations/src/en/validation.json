@@ -10,7 +10,8 @@
         "required": "Select a sex"
     },
     "country-of-nationality": {
-        "required": "Enter a country of nationality"
+        "required": "Enter a country of nationality",
+        "excludeUK": "You do not need to use this service if you are a British citizen"
     },
     "dob": {
         "required": "Enter your date of birth",
