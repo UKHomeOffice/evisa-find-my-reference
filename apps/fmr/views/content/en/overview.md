@@ -13,4 +13,4 @@ You can [get help](https://www.gov.uk/assisted-digital-help-online-applications)
 
 You can only get this support if you are in the UK.
 
-You can also [contact UK Visas and Immigration for help with this service](https://gov.uk/contact-ukvi-inside-outside-uk).
+You can also [contact UK Visas and Immigration for help with this service](https://www.gov.uk/contact-ukvi-inside-outside-uk).
