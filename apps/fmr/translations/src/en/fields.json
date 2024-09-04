@@ -1,3 +1,10 @@
 {
-  
+    "given-names": {
+        "label": "Given names",
+        "hint": "Your first and middle names"
+    },
+    "surname": {
+        "label": "Surname",
+        "hint": "Include all your surnames"
+    }
 }

@@ -1,0 +1,15 @@
+{{<partials-page}}
+  {{$page-content}}
+  
+    {{#markdown}}name-intro{{/markdown}}
+
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+  
+    {{#input-submit}}continue{{/input-submit}}
+
+    {{#markdown}}need-help{{/markdown}}
+
+  {{/page-content}}
+{{/partials-page}}

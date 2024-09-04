@@ -7,11 +7,14 @@ module.exports = {
     '/': {
       next: '/name',
       fields: [],
-      template: 'start'
+      template: 'start',
+      sidepanel: true,
+      fullwidth: true
     },
     '/name': {
       next: '/sex',
-      fields: []
+      fields: ['given-names', 'surname'],
+      backLink: ' ' // workaround to show Back link to the root of the app
     },
     '/sex': {
       next: '/nationality',
