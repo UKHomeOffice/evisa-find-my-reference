@@ -14,7 +14,7 @@ module.exports = {
     '/name': {
       next: '/sex',
       fields: ['given-names', 'surname'],
-      backLink: " " // workaround to show Back link to the root of the app
+      backLink: ' ' // workaround to show Back link to the root of the app
     },
     '/sex': {
       next: '/nationality',
