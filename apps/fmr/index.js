@@ -1,7 +1,3 @@
-const hof = require('hof');
-const Summary = hof.components.summary;
-const clearSession = require('./behaviours/clear-session');
-
 module.exports = {
   name: 'fmr',
   baseUrl: '/',
@@ -22,14 +18,14 @@ module.exports = {
       fields: []
     },
     '/nationality': {
-      next: '/date-birth/',
+      next: '/date-birth',
       fields: []
     },
-    '/date-birth/': {
-      next: '/upload-photo/',
+    '/date-birth': {
+      next: '/upload-photo',
       fields: []
     },
-    '/upload-photo/': {
+    '/upload-photo': {
       next: '/any-other-information',
       fields: []
     },
@@ -46,9 +42,7 @@ module.exports = {
       fields: []
     },
     '/check-answers': {
-      next: '/request-sent',
-      fields: [],
-      behaviours: [Summary, clearSession]
+      next: '/request-sent'
     },
     '/request-sent': {
     }

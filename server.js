@@ -1,7 +1,6 @@
 'use strict';
 
 const hof = require('hof');
-const config = require('./config.js');
 
 let settings = require('./hof.settings');
 
