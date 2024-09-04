@@ -18,15 +18,15 @@ module.exports = {
     },
     '/sex': {
       next: '/nationality',
-      fields: []
+      fields: ['sex']
     },
     '/nationality': {
       next: '/date-birth',
-      fields: []
+      fields: ['country-of-nationality']
     },
     '/date-birth': {
       next: '/upload-photo',
-      fields: []
+      fields: ['dob']
     },
     '/upload-photo': {
       next: '/any-other-information',

@@ -6,5 +6,29 @@
     "surname": {
         "label": "Surname",
         "hint": "Include all your surnames"
+    },
+    "sex": {
+        "legend": "This is the sex that is on the identity document you used in your most recent visa application.",
+        "options": {
+            "female": {
+                "label": "Female"
+            },
+            "male": {
+                "label": "Male"
+            },
+            "other": {
+                "label": "X or other"
+            }
+        }
+    },
+    "country-of-nationality": {
+        "label": "This is the country of nationality shown on the identity document you used in your most recent visa application. Use the English spelling or the country code.",
+        "options": {
+          "none_selected": "Select a country"
+        }
+    },
+    "dob": {
+        "legend": "You should enter this as shown on the identity document you used in your most recent visa application.",
+        "hint": "For example, 31 3 1980."
     }
 }

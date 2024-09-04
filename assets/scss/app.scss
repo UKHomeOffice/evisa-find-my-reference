@@ -1,3 +1,5 @@
+@use 'autocomplete';
+
 @import "hof/frontend/themes/gov-uk/styles/govuk";
 
 ul {
@@ -132,11 +134,6 @@ textarea {
   color: #6f777b;
   margin-left: 2rem;
   padding-bottom: 1rem;
-}
-
-.govuk-button {
-  margin-right: 0.5rem;
-  margin-top: 30px;
 }
 
 .govuk-caption-l {

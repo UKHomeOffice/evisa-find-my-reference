@@ -5,5 +5,17 @@
     "surname": {
         "required": "Enter a surname",
         "validateText": "Surname must only include letters a to z, spaces, hyphens and apostrophes"
+    },
+    "sex": {
+        "required": "Select a sex"
+    },
+    "country-of-nationality": {
+        "required": "Enter a country of nationality",
+        "excludeUK": "You do not need to use this service if you are a British citizen"
+    },
+    "dob": {
+        "required": "Enter your date of birth",
+        "date": "The date must only contain numbers. For example, 31 3 1980.",
+        "before": "Date of birth must be in the past"
     }
 }
