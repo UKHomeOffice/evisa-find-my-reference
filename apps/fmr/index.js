@@ -34,7 +34,7 @@ module.exports = {
     },
     '/any-other-information': {
       next: '/contact',
-      fields: []
+      fields: ['anything-else']
     },
     '/contact': {
       next: '/someone-else',

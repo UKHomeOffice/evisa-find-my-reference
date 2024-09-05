@@ -75,5 +75,15 @@ module.exports = {
     legend: {
       className: 'govuk-!-margin-bottom-4'
     }
-  })
+  }),
+  'anything-else': {
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      { type: 'maxlength', arguments: 500 }
+    ],
+    labelClassName: 'govuk-!-margin-bottom-6',
+    isPageHeading: true
+  }
 };

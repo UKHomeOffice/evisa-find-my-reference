@@ -17,5 +17,8 @@
         "required": "Enter your date of birth",
         "date": "The date must only contain numbers. For example, 31 3 1980.",
         "before": "Date of birth must be in the past"
+    },
+    "anything-else": {
+        "maxlength": "You have exceeded the 500 character limit"
     }
 }
