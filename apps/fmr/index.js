@@ -38,7 +38,15 @@ module.exports = {
     },
     '/contact': {
       next: '/someone-else',
-      fields: []
+      fields: [
+        'how-to-contact-you',
+        'email',
+        'address-line-1',
+        'address-line-2',
+        'town-or-city',
+        'county',
+        'postcode'
+      ]
     },
     '/someone-else': {
       next: '/check-answers',

@@ -10,8 +10,7 @@
         "required": "Select a sex"
     },
     "country-of-nationality": {
-        "required": "Enter a country of nationality",
-        "excludeUK": "You do not need to use this service if you are a British citizen"
+        "required": "Enter a country of nationality"
     },
     "dob": {
         "required": "Enter your date of birth",
@@ -20,5 +19,23 @@
     },
     "anything-else": {
         "maxlength": "You have exceeded the 500 character limit"
+    },
+    "how-to-contact-you": {
+        "required": "Select how you want to be contacted"
+    },
+    "email": {
+        "required": "Enter an email address",
+        "email": "Enter an email address in the correct format, like name@example.com",
+        "maxlength": "Email address must be less than 254 characters"
+    },
+    "address-line-1": {
+        "required": "Enter address line 1, typically your building and street"
+    },
+    "town-or-city": {
+        "required": "Enter your town or city"
+    },
+    "postcode": {
+        "required": "Enter your postcode",
+        "postcode": "Enter a valid UK postcode"
     }
 }
