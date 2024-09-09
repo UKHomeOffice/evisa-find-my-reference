@@ -9,7 +9,8 @@ module.exports = {
       fields: [],
       template: 'start',
       sidepanel: true,
-      fullwidth: true
+      fullwidth: true,
+      isNeedHelpHidden: true
     },
     '/name': {
       next: '/sex',
