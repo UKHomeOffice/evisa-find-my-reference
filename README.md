@@ -4,7 +4,7 @@ eVisa Find My Reference (FMR) used by the public to request their reference numb
 
 ## Description
 
-- The service allows the user to make a request as the applicant themselve, or by someone who is helping the applicant, or by the applicant's legal representative.
+- The service allows the user to make a request as the applicant themselves, or by someone who is helping the applicant, or by the applicant's legal representative.
 - The form facilitates the upload of required documents, such as the applicant's photo.
 - The user is able to review all the answers provided to confirm their details prior to submission.
 - Once the application is submitted, automated notifications are sent to the business/employee and the user.
@@ -54,7 +54,7 @@ By following these steps, you should be able to install and run your application
 
 3. Open a terminal, navigate to the project directory and run: `docker compose -f .devcontainer/docker-compose.dev.yml up -d`
 
-4. Once the containers are built and started, you can go inside the app container: `docker exec -it devcontainer-hof-coa-app-1 sh` (note: Docker containers may be named differently)
+4. Once the containers are built and started, you can go inside the app container: `docker exec -it devcontainer-hof-fmr-app-1 sh` (note: Docker containers may be named differently)
 
 5. Run the necessary commands to install dependencies `yarn` and `yarn start:dev` to start your application.
 
@@ -89,7 +89,7 @@ By following these steps, you should be able to run your application using a dev
 ### Testing
 
 #### Linting Tests
-`$ yarn run test:lint`
+`$ yarn test:lint`
 
 #### Unit Tests
 `$ yarn test:unit`
