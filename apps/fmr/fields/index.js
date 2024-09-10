@@ -21,16 +21,6 @@ function validateText(value) {
   return true;
 }
 
-
-/**
- * Validation rule to exclude the value 'United Kingdom'.
- * @param {string} value - The value to be checked.
- * @returns {boolean} - Returns true if the value is not 'United Kingdom', otherwise false.
- */
-function excludeUK(value) {
-  return value !== 'United Kingdom';
-}
-
 module.exports = {
   'given-names': {
     mixin: 'input-text',
@@ -59,11 +49,11 @@ module.exports = {
     mixin: 'select',
     className: ['typeahead'],
     labelClassName: 'govuk-!-margin-bottom-4',
-    validate: ['required', excludeUK],
+    validate: ['required'],
     options: [{
       value: '',
       label: 'fields.country-of-nationality.options.none_selected'
-    }].concat(countries.filter(country => country.value !== 'United Kingdom'))
+    }].concat(countries)
   },
   dob: dateComponent('dob', {
     mixin: 'input-date',
@@ -75,5 +65,78 @@ module.exports = {
     legend: {
       className: 'govuk-!-margin-bottom-4'
     }
-  })
+  }),
+  'anything-else': {
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      { type: 'maxlength', arguments: 500 }
+    ],
+    labelClassName: 'govuk-!-margin-bottom-6',
+    isPageHeading: true
+  },
+  'how-to-contact-you': {
+    mixin: 'radio-group',
+    validate: ['required'],
+    options: [
+      {
+        value: 'email',
+        toggle: 'email',
+        child: 'input-text'
+      },
+      {
+        value: 'uk-address',
+        toggle: 'address-details-fieldset',
+        child: 'partials/address-details'
+      }
+    ],
+    legend: {
+      className: 'govuk-!-margin-bottom-6'
+    }
+  },
+  email: {
+    mixin: 'input-text',
+    validate: [
+      'required',
+      'email',
+      { type: 'maxlength', arguments: 254 }
+    ],
+    dependent: {
+      field: 'how-to-contact-you',
+      value: 'email'
+    }
+  },
+  'address-line-1': {
+    mixins: 'input-text',
+    validate: ['required'],
+    dependent: {
+      field: 'how-to-contact-you',
+      value: 'uk-address'
+    }
+  },
+  'address-line-2': {
+    mixins: 'input-text'
+  },
+  'town-or-city': {
+    mixins: 'input-text',
+    validate: ['required'],
+    dependent: {
+      field: 'how-to-contact-you',
+      value: 'uk-address'
+    }
+  },
+  county: {
+    mixins: 'input-text',
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  postcode: {
+    mixins: 'input-text',
+    formatter: ['ukPostcode'],
+    validate: ['required', 'postcode'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'how-to-contact-you',
+      value: 'uk-address'
+    }
+  }
 };

@@ -5,12 +5,4 @@ You will also need an email address or a UK postal address. We will then send yo
 
 <h2 class="govuk-heading-m">If you need help using this service</h2>
 
-You can [get help](https://www.gov.uk/assisted-digital-help-online-applications) if you:
-
-- do not feel confident using a computer or mobile device
-- do not have internet access
-- do not have access to a device like a laptop or smartphone
-
-You can only get this support if you are in the UK.
-
-You can also [contact UK Visas and Immigration for help with this service](https://www.gov.uk/contact-ukvi-inside-outside-uk).
+You can [contact UK Visas and Immigration for help with this service](https://www.gov.uk/contact-ukvi-inside-outside-uk).
