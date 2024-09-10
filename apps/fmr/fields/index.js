@@ -125,11 +125,11 @@ module.exports = {
       value: 'uk-address'
     }
   },
-  'county': {
+  county: {
     mixins: 'input-text',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
-  'postcode': {
+  postcode: {
     mixins: 'input-text',
     formatter: ['ukPostcode'],
     validate: ['required', 'postcode'],
@@ -138,5 +138,5 @@ module.exports = {
       field: 'how-to-contact-you',
       value: 'uk-address'
     }
-  },
+  }
 };
