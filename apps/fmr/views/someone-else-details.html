@@ -1,0 +1,13 @@
+{{<partials-page}}
+  {{$page-content}}
+  
+    {{#input-text}}someone-else-name{{/input-text}}
+    {{#input-text}}someone-else-email{{/input-text}}
+    
+    {{#radio-group}}someone-else-type{{/radio-group}}
+    <p>{{#t}}pages.someone-else-details.consent{{/t}}</p>
+
+    {{#input-submit}}continue{{/input-submit}}
+
+  {{/page-content}}
+{{/partials-page}}
