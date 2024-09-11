@@ -27,7 +27,6 @@ module.exports = {
     validate: [validateText],
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
     labelClassName: 'govuk-label--s'
-
   },
   surname: {
     mixin: 'input-text',
@@ -137,6 +136,58 @@ module.exports = {
     dependent: {
       field: 'how-to-contact-you',
       value: 'uk-address'
+    }
+  },
+  'someone-else': {
+    isPageHeading: 'true',
+    mixin: 'radio-group',
+    validate: 'required',
+    // className: ['block', 'form-group', 'govuk-radios govuk-radios--inline'],
+    options: [
+      {
+        value: 'yes',
+        toggle: 'someone-else-details-fieldset',
+        child: 'partials/someone-else-details'
+      },
+      {
+        value: 'no'
+      }
+    ]
+  },
+  'someone-else-name': {
+    mixin: 'input-text',
+    validate: [validateText],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    labelClassName: 'govuk-label--s',
+    dependent: {
+      field: 'someone-else',
+      value: 'yes'
+    }
+  },
+  'someone-else-email': {
+    mixin: 'input-text',
+    validate: [
+      'required',
+      'email',
+      { type: 'maxlength', arguments: 254 }
+    ],
+    dependent: {
+      field: 'someone-else',
+      value: 'yes'
+    }
+  },
+  'someone-else-type': {
+    mixin: 'radio-group',
+    validate: 'required',
+    options: [
+      { value: 'sponsor' },
+      { value: 'legal-representative' },
+      { value: 'friend-or-relative' },
+      { value: 'support-organisation' }
+    ],
+    dependent: {
+      field: 'someone-else',
+      value: 'yes'
     }
   }
 };

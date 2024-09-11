@@ -51,7 +51,12 @@ module.exports = {
     },
     '/someone-else': {
       next: '/check-answers',
-      fields: []
+      fields: [
+        'someone-else',
+        'someone-else-name',
+        'someone-else-email',
+        'someone-else-type'
+      ]
     },
     '/check-answers': {
       next: '/request-sent'

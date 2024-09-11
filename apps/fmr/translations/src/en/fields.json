@@ -64,5 +64,40 @@
     },
     "postcode": {
         "label": "Postcode"
+    },
+    "someone-else": {
+        "legend": "Are you completing this form on behalf of someone else?",
+        "hint": "For example, you are a friend, relative, employer, charity worker or lawyer.",
+        "options": {
+            "yes": {
+                "label": "Yes"
+            },
+            "no": {
+                "label": "No"
+            }
+        }
+    },
+    "someone-else-name": {
+        "label": "Full name"
+    },
+    "someone-else-email": {
+        "label": "Email address"
+    },
+    "someone-else-type": {
+        "legend": "Type of support",
+        "options": {
+            "sponsor": {
+                "label": "Sponsor"
+            },
+            "legal-representative": {
+                "label": "Legal representative"
+            },
+            "friend-or-relative": {
+                "label": "Friend or relative"
+            },
+            "support-organisation": {
+                "label": "Support organisation"
+            }
+        }
     }
 }

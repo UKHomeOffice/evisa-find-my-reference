@@ -37,5 +37,20 @@
     "postcode": {
         "required": "Enter your postcode",
         "postcode": "Enter a valid UK postcode"
+    },
+    "someone-else": {
+        "required": "Select if you are completing this form on behalf of someone else"
+    },
+    "someone-else-name": {
+        "required": "Enter your full name",
+        "validateText": "Full name must only include letters a to z, spaces, hyphens and apostrophes"
+    },
+    "someone-else-email": {
+        "required": "Enter your email address",
+        "email": "Enter an email address in the correct format, like name@example.com",
+        "maxlength": "Email address must be less than 254 characters"
+    },
+    "someone-else-type": {
+        "required": "Select which type of support you are to the requestor"
     }
 }
