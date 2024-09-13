@@ -51,7 +51,24 @@ module.exports = {
     },
     '/someone-else': {
       next: '/check-answers',
-      fields: []
+      fields: ['someone-else'],
+      forks: [
+        {
+          target: '/someone-else-details',
+          condition: {
+            field: 'someone-else',
+            value: 'yes'
+          }
+        }
+      ]
+    },
+    '/someone-else-details': {
+      next: '/check-answers',
+      fields: [
+        'someone-else-name',
+        'someone-else-email',
+        'someone-else-type'
+      ]
     },
     '/check-answers': {
       next: '/request-sent'
