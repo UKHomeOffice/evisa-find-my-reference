@@ -142,7 +142,6 @@ module.exports = {
     isPageHeading: 'true',
     mixin: 'radio-group',
     validate: 'required',
-    className: ['block', 'form-group', 'govuk-radios govuk-radios--inline'],
     options: [
       {
         value: 'yes'
