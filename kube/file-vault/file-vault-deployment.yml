@@ -2,17 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+  name: file-vault
+  {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  annotations:
+    downscaler/uptime: {{ .NON_PROD_AVAILABILITY }}
   name: file-vault-{{ .DRONE_SOURCE_BRANCH }}
   {{ else }}
+  annotations:
+    downscaler/uptime: {{ .NON_PROD_AVAILABILITY }}
   name: file-vault
   {{ end }}
 spec:
-  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-  replicas: 2
-  {{ else }}
-  replicas: 1
-  {{ end }}
   selector:
     matchLabels:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -35,11 +36,12 @@ spec:
     spec:
       containers:
         - name: file-vault
+          # v1.1.0
           image: quay.io/ukhomeofficedigital/file-vault:f4cd1ece1caddc3bfbc8f5db761c593fda79ef12
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
             requests:
               memory: 512Mi
@@ -51,6 +53,7 @@ spec:
                 name: {{ .APP_NAME }}-configmap
                 {{ end }}
           env:
+            # because the internal virus scanner has a self signed cert!
             - name: NODE_TLS_REJECT_UNAUTHORIZED
               value: "0"
             - name: FILE_VAULT_URL
@@ -61,9 +64,9 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
+              value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
             - name: DEBUG
-              value: "true"
+              value: "*"
             {{ end }}
             - name: PORT
               value: "3000"
@@ -72,49 +75,71 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-                  name: sas-{{ .APP_NAME }}-s3
-                  key: iam_access_key
-                {{else}}
-                  name: {{ .APP_NAME }}-notprod-s3
+                  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                  name: fmr-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+                  name: fmr-s3-uat
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: fmr-s3-stg
+                  {{ else }}
+                  name: fmr-s3-prod
+                  {{ end }}
                   key: access_key_id
-                {{end}}
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-                  name: sas-{{ .APP_NAME }}-s3
-                  key: iam_access_secret
-                {{else}}
-                  name: {{ .APP_NAME }}-notprod-s3
+                  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                  name: fmr-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+                  name: fmr-s3-uat
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: fmr-s3-stg
+                  {{ else }}
+                  name: fmr-s3-prod
+                  {{ end }}
                   key: secret_access_key
-                {{end}}
             - name: AWS_KMS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-                  name: sas-{{ .APP_NAME }}-s3
-                {{else}}
-                  name: {{ .APP_NAME }}-notprod-s3
-                {{end}}
+                  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                  name: fmr-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+                  name: fmr-s3-uat
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: fmr-s3-stg
+                  {{ else }}
+                  name: fmr-s3-prod
+                  {{ end }}
                   key: kms_key_id
             - name: AWS_BUCKET
               valueFrom:
                 secretKeyRef:
-                {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-                  name: sas-{{ .APP_NAME }}-s3
-                  key: s3_bucket_name
-                {{else}}
-                  name: {{ .APP_NAME }}-notprod-s3
+                  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                  name: fmr-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+                  name: fmr-s3-uat
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: fmr-s3-stg
+                  {{ else }}
+                  name: fmr-s3-prod
+                  {{ end }}
                   key: name
-                {{end}}
             - name: AWS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ses
-                  key: smtp_password
+                  name: file-vault
+                  # encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
+                  key: encryption_key
+            - name: AWS_EXPIRY_TIME
+              value: "120" # 2 minutes in seconds
+            - name: RETURN_ORIGINAL_SIGNED_URL
+              value: "no"
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            - name: DEBUG
+              value: "*"
+            {{ end }}
           securityContext:
             runAsNonRoot: true
 
@@ -122,8 +147,15 @@ spec:
           image: quay.io/ukhomeofficedigital/gogatekeeper:2.9.2
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
+          envFrom:
+            - configMapRef:
+                {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
+                {{ else }}
+                name: {{ .APP_NAME }}-configmap
+                {{ end }}
           env:
             - name: PROXY_CLIENT_SECRET
               valueFrom:
@@ -135,30 +167,50 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            - name: PROXY_LISTEN
+              value: 127.0.0.1:3001
+            - name: PROXY_UPSTREAM_URL
+              value: "https://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-              value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
+              value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
+              value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
+            {{ end }}
+            - name: PROXY_DISCOVERY_URL
+            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+              value: https://acp-sso.prod.acp.homeoffice.gov.uk/realms/fmr
+            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+              value: https://acp-sso.prod.acp.homeoffice.gov.uk/realms/fmr
+            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+              value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/fmr-notprod
+            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/fmr-notprod
             {{ end }}
           args:
-            - --listen=:10443
+            - --listen=127.0.0.1:3001
             # the url which is used to retrieve the OpenID configuration
-            {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
-            - --discovery-url=https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/{{ .APP_NAME }}-notprod
-            {{ else }}
-            - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/{{ .APP_NAME }}
-            {{ end }}
+            - --discovery-url=$(PROXY_DISCOVERY_URL)
             # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
+            - --upstream-url=https://127.0.0.1:3000
             # URls that you wish to protect.
             - --resources=uri=/*
+            - --client-id=$(PROXY_CLIENT_ID)
+            - --client-secret=$(PROXY_CLIENT_SECRET)
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
+            - --enable-default-deny=false
+            - --http-only-cookie=true
+            - --enable-security-filter=true
+            - --enable-request-id=true
+            - --enable-logging=true
+            - --enable-json-logging=true
+            - --redirection-url=$(PROXY_REDIRECTION_URL)
+            - --tls-min-version=tlsv1.2
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
@@ -181,7 +233,7 @@ spec:
           image: quay.io/ukhomeofficedigital/nginx-proxy-govuk@sha256:4470064d0b1d20ae08c5fd85551576cb687f342a22d6cb456fda9b2c4ce8c8df
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
             requests:
               memory: 512Mi
