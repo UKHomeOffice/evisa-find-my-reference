@@ -10,8 +10,8 @@ environment:
   UAT_ENV: sas-fmr-uat
   BRANCH_ENV: sas-fmr-brach
   PRODUCTION_URL: www.request-reference-evisa.homeoffice.gov.uk
-  IMAGE_URL: quay.io/ukhomeofficedigital
-  IMAGE_REPO: fmr
+  IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
+  IMAGE_REPO: sas/fmr
   GIT_REPO: UKHomeOffice/evisa-find-my-reference
   HOF_CONFIG: hof-services-config/E_Visa_Find_My_Reference_Form
   NON_PROD_AVAILABILITY: Mon-Fri 08:00-23:00 Europe/London
