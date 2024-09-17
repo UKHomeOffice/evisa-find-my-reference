@@ -1,0 +1,56 @@
+{
+    "given-names": {
+        "validateText": "Given names must only include letters a to z, spaces, hyphens and apostrophes"
+    },
+    "surname": {
+        "required": "Enter a surname",
+        "validateText": "Surname must only include letters a to z, spaces, hyphens and apostrophes"
+    },
+    "sex": {
+        "required": "Select a sex"
+    },
+    "country-of-nationality": {
+        "required": "Enter a country of nationality"
+    },
+    "dob": {
+        "required": "Enter your date of birth",
+        "date": "The date must only contain numbers. For example, 31 3 1980.",
+        "before": "Date of birth must be in the past"
+    },
+    "anything-else": {
+        "maxlength": "You have exceeded the 500 character limit"
+    },
+    "how-to-contact-you": {
+        "required": "Select how you want to be contacted"
+    },
+    "email": {
+        "required": "Enter an email address",
+        "email": "Enter an email address in the correct format, like name@example.com",
+        "maxlength": "Email address must be less than 254 characters"
+    },
+    "address-line-1": {
+        "required": "Enter address line 1, typically your building and street"
+    },
+    "town-or-city": {
+        "required": "Enter your town or city"
+    },
+    "postcode": {
+        "required": "Enter your postcode",
+        "postcode": "Enter a valid UK postcode"
+    },
+    "someone-else": {
+        "required": "Select if you are completing this form on behalf of someone else"
+    },
+    "someone-else-name": {
+        "required": "Enter your full name",
+        "validateText": "Full name must only include letters a to z, spaces, hyphens and apostrophes"
+    },
+    "someone-else-email": {
+        "required": "Enter your email address",
+        "email": "Enter an email address in the correct format, like name@example.com",
+        "maxlength": "Email address must be less than 254 characters"
+    },
+    "someone-else-type": {
+        "required": "Select which type of support you are to the requestor"
+    }
+}

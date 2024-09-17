@@ -1,0 +1,103 @@
+{
+    "given-names": {
+        "label": "Given names",
+        "hint": "Your first and middle names"
+    },
+    "surname": {
+        "label": "Surname",
+        "hint": "Include all your surnames"
+    },
+    "sex": {
+        "legend": "This is the sex that is on the identity document you used in your most recent visa application.",
+        "options": {
+            "female": {
+                "label": "Female"
+            },
+            "male": {
+                "label": "Male"
+            },
+            "other": {
+                "label": "X or other"
+            }
+        }
+    },
+    "country-of-nationality": {
+        "label": "This is the country of nationality shown on the identity document you used in your most recent visa application. Use the English spelling or the country code.",
+        "options": {
+          "none_selected": "Select a country"
+        }
+    },
+    "dob": {
+        "legend": "You should enter this as shown on the identity document you used in your most recent visa application.",
+        "hint": "For example, 31 3 1980."
+    },
+    "anything-else": {
+        "label": "Is there anything else you can tell us that may help us find your record?",
+        "hint": "For example, if you have ever had another name or nationality. Or if you have a reference number which you have tried using to get access to your eVisa."
+    },
+    "how-to-contact-you": {
+        "legend": "We will send you your reference number if we can find your record from the details you have provided. You may get a faster response by email.",
+        "hint": "Select one option.",
+        "options": {
+            "email": {
+                "label": "Email"
+            },
+            "uk-address": {
+                "label": "UK address"
+            }
+        }
+    },
+    "email": {
+        "label": "Email address"
+    },
+    "address-line-1": {
+        "label": "Address line 1"
+    },
+    "address-line-2": {
+        "label": "Address line 2 (optional)"
+    },
+    "town-or-city": {
+        "label": "Town or city"
+    },
+    "county": {
+        "label": "County (optional)"
+    },
+    "postcode": {
+        "label": "Postcode"
+    },
+    "someone-else": {
+        "legend": "Are you completing this form on behalf of someone else?",
+        "hint": "For example, you are a friend, relative, employer, charity worker or lawyer.",
+        "options": {
+            "yes": {
+                "label": "Yes"
+            },
+            "no": {
+                "label": "No"
+            }
+        }
+    },
+    "someone-else-name": {
+        "label": "Full name"
+    },
+    "someone-else-email": {
+        "label": "Email address"
+    },
+    "someone-else-type": {
+        "legend": "Type of support",
+        "options": {
+            "sponsor": {
+                "label": "Sponsor"
+            },
+            "legal-representative": {
+                "label": "Legal representative"
+            },
+            "friend-or-relative": {
+                "label": "Friend or relative"
+            },
+            "support-organisation": {
+                "label": "Support organisation"
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{
+  "start": {
+    "header": "Request your reference number to get access to your eVisa",
+    "intro": "Use this service to find your BRP number or application number, if you need it to get access to your eVisa."
+  },
+  "name": {
+    "header": "What is your name?"
+  },
+  "sex": {
+    "header": "What is your sex?"
+  },
+  "nationality": {
+    "header": "What is your country of nationality?"
+  },
+  "date-birth": {
+    "header": "What is your date of birth?"
+  },
+  "upload-photo": {
+    "header": "Upload a photo of yourself"
+  },
+  "any-other-information": {
+  },
+  "contact": {
+    "header": "How would you like us to contact you?"
+  },
+  "someone-else": {
+  },
+  "someone-else-details": {
+    "header": "What are your details?",
+    "intro": "We will attempt to contact the requestor directly. We will only use these details to contact you if needed.",
+    "consent": "By continuing, you confirm that you have consent to send this request on their behalf."
+  },
+  "check-answers": {
+    "header": "Check your answers before sending your request"
+  },
+  "request-sent": {
+    "header": "Request sent"
+  },
+  "confirm": {
+    "sections": {
+    },
+    "fields": {
+    }
+  }
+}
