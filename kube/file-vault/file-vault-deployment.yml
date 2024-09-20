@@ -76,7 +76,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-                  name: fmr-s3-bucket
+                  name: fmr-s3-branch
                   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
                   name: fmr-s3-uat
                   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
@@ -89,7 +89,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-                  name: fmr-s3-bucket
+                  name: fmr-s3-branch
                   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
                   name: fmr-s3-uat
                   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
@@ -102,7 +102,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-                  name: fmr-s3-bucket
+                  name: fmr-s3-branch
                   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
                   name: fmr-s3-uat
                   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
@@ -115,7 +115,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-                  name: fmr-s3-bucket
+                  name: fmr-s3-branch
                   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
                   name: fmr-s3-uat
                   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
