@@ -192,15 +192,8 @@ spec:
               value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/fmr-notprod
             {{ end }}
           args:
-            - --listen=127.0.0.1:3001
-            # the url which is used to retrieve the OpenID configuration
-            - --discovery-url=$(PROXY_DISCOVERY_URL)
-            # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:3000
             # URls that you wish to protect.
             - --resources=uri=/*
-            - --client-id=$(PROXY_CLIENT_ID)
-            - --client-secret=$(PROXY_CLIENT_SECRET)
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
@@ -209,7 +202,6 @@ spec:
             - --enable-request-id=true
             - --enable-logging=true
             - --enable-json-logging=true
-            - --redirection-url=$(PROXY_REDIRECTION_URL)
             - --tls-min-version=tlsv1.2
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true

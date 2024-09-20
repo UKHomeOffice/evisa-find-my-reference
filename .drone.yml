@@ -235,17 +235,6 @@ steps:
           - master
       event: push
 
-  # - name: acceptance_tests_uat
-  #   <<: *acceptance_tests
-  #   commands:
-  #     - export ACCEPTANCE_HOST_NAME=https://{{APP_NAME}}.internal.uat.sas-notprod.homeoffice.gov.uk
-  #     - npx playwright install
-  #     - npm run test:acceptance
-  #   when:
-  #     branch: master
-  #     event: push
-
-
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
     pull: if-not-exists
