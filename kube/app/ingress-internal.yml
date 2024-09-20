@@ -18,6 +18,9 @@ spec:
         - {{ .APP_NAME }}.internal.uat.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
         - {{ .APP_NAME }}.internal.stg.sas.homeoffice.gov.uk
+      {{ end }}
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      secretName: branch-tls-internal
       {{ else }}
       secretName: {{ .APP_NAME }}-internal
       {{ end }}
