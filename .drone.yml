@@ -8,7 +8,7 @@ environment:
   PROD_ENV: sas-fmr-prod
   STG_ENV: sas-fmr-stg
   UAT_ENV: sas-fmr-uat
-  BRANCH_ENV: sas-fmr-brach
+  BRANCH_ENV: sas-fmr-branch
   PRODUCTION_URL: www.request-reference-evisa.homeoffice.gov.uk
   IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
   IMAGE_REPO: sas/fmr
