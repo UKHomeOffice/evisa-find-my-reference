@@ -5,7 +5,7 @@ metadata:
   labels:
     cert-manager.io/solver: route53
 spec:
-  commonName: "*.internal..branch.sas-notprod.homeoffice.gov.uk"
+  commonName: "*.internal.branch.sas-notprod.homeoffice.gov.uk"
   dnsNames:
   - "*.internal.branch.sas-notprod.homeoffice.gov.uk"
   issuerRef:
