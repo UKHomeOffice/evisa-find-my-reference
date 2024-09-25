@@ -1,14 +1,8 @@
 node_modules
+documentation
 public
 apps/**/translations/**/default.json
 LICENSE.md
 README.md
 CONTRIBUTING.md
-.devcontainer
-.git
-.gitignore
-.DS_Store
-.env
-coverage
-Dockerfile
-pull-request-template.md
+npm-debug.log

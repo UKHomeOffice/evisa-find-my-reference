@@ -6,7 +6,6 @@ coverage
 .env
 output/
 *.iml
-anchore-reports
 .nyc_output
 .vscode
 .vscode-server
