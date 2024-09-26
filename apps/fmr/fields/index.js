@@ -47,8 +47,7 @@ module.exports = {
       { type: 'maxlength', arguments: 500 }
     ],
     attributes: [{ attribute: 'rows', value: 5 }],
-    labelClassName: 'govuk-!-margin-bottom-6',
-    isPageHeading: true
+    labelClassName: 'govuk-!-margin-bottom-6'
   },
   'given-names': {
     mixin: 'input-text',
@@ -178,7 +177,7 @@ module.exports = {
         value: 'no'
       }
     ],
-    className: ['govuk-radios', 'govuk-radios--inline'],
+    className: ['govuk-radios', 'govuk-radios--inline']
   },
   'someone-else-name': {
     mixin: 'input-text',
