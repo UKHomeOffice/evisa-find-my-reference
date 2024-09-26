@@ -5,17 +5,34 @@ module.exports = {
   confirmStep: '/check-answers',
   steps: {
     '/': {
-      next: '/name',
+      next: '/identity',
       fields: [],
       template: 'start',
       sidepanel: true,
       fullwidth: true,
       isNeedHelpHidden: true
     },
+    '/identity': {
+      next: '/name',
+      fields: ['identity'],
+      forks: [
+        {
+          target: '/identity-reason',
+          condition: {
+            field: 'identity',
+            value: 'no'
+          }
+        }
+      ],
+      backLink: ' ' // workaround to show Back link to the root of the app
+    },
+    '/identity-reason': {
+      next: '/name',
+      fields: ['identity-reason']
+    },
     '/name': {
       next: '/sex',
-      fields: ['given-names', 'surname'],
-      backLink: ' ' // workaround to show Back link to the root of the app
+      fields: ['given-names', 'surname']
     },
     '/sex': {
       next: '/nationality',
