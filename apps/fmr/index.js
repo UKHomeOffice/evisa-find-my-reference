@@ -1,3 +1,6 @@
+const hof = require('hof');
+const Summary = hof.components.summary;
+
 module.exports = {
   name: 'fmr',
   baseUrl: '/',
@@ -71,9 +74,15 @@ module.exports = {
       ]
     },
     '/check-answers': {
+      behaviours: [Summary],
+      sections: require('./sections/summary-data-sections'),
+      template: 'summary',
       next: '/request-sent'
     },
     '/request-sent': {
+      clearSession: true,
+      backLink: false,
+      isNeedHelpHidden: true
     }
   }
 };
