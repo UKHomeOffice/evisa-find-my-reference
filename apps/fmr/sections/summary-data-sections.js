@@ -67,10 +67,6 @@ module.exports = {
     steps: [
       {
         step: '/someone-else-details',
-        field: 'detail-signin-email'
-      },
-      {
-        step: '/someone-else-details',
         field: 'someone-else-name'
       },
       {
