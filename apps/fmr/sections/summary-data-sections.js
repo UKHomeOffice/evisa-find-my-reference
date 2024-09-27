@@ -1,6 +1,3 @@
-const { steps } = require('..');
-const { getLabel, formatDate } = require('../../../utils');
-
 module.exports = {
   'personal-details': {
     steps: [
