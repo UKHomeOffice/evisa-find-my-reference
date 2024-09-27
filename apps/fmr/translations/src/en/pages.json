@@ -1,7 +1,6 @@
 {
   "start": {
-    "header": "Request your reference number to get access to your eVisa",
-    "intro": "Use this service to find your BRP number or application number, if you need it to get access to your eVisa."
+    "header": "Request your reference number or book a video appointment to get access to your eVisa"
   },
   "name": {
     "header": "What is your name?"

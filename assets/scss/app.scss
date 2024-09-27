@@ -168,10 +168,6 @@ pre.looped-records {
   text-decoration: none;
 }
 
-.confirm-label {
-  font-weight: normal;
-}
-
 .link-container {
   display: flex;
   justify-content: flex-end;
@@ -197,4 +193,8 @@ pre.looped-records {
 
 .govuk-character-count__message {
   display: none;
+}
+
+.govuk-fieldset__heading{
+  font-family: "GDS Transport", arial, sans-serif;
 }
