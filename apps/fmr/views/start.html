@@ -4,7 +4,7 @@
   {{/pageTitle}}
   {{$page-content}}
 
-    <p class="govuk-!-margin-top-0">{{#t}}pages.start.intro{{/t}}</p>
+    {{#markdown}}overview{{/markdown}}
 
     <button class="govuk-button govuk-button--start govuk-!-margin-top-0" type="submit">
       {{#t}}buttons.start-now{{/t}}
@@ -13,7 +13,7 @@
       </svg>
     </button>
     
-    {{#markdown}}overview{{/markdown}}
+    {{#markdown}}overview-help{{/markdown}}
 
   {{/page-content}}
 {{/partials-page}}

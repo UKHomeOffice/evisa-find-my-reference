@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "start:dev": "hof-build watch",
+    "start:dev": "[ -f .env ] && hof-build watch --env || hof-build watch",
     "build": "hof-build",
     "postinstall": "hof-build",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/UKHomeOffice/evisa-find-my-reference#readme",
   "dependencies": {
-    "hof": "^21.0.6",
-    "accessible-autocomplete": "^3.0.0"
+    "accessible-autocomplete": "^3.0.1",
+    "hof": "^21.1.1"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
