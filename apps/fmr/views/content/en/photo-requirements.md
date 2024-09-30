@@ -1,0 +1,7 @@
+- a plain light background, for example, a white wall
+- no shadows or glare on your face or behind you
+- no objects or people behind you
+- your head and shoulders visible
+- have anything covering your face or eyes
+- wear a head covering (unless it is for religious or medical reasons)
+- removed your glasses if there is any glare or they are tinted

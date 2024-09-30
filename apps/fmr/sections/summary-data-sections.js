@@ -30,6 +30,13 @@ module.exports = {
         field: 'dob'
       },
       {
+        step: '/upload-photo',
+        field: 'identity-documents',
+        parse: documents => {
+          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
+        }
+      },
+      {
         step: '/any-other-information',
         field: 'anything-else'
       },

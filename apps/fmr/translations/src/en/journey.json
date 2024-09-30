@@ -1,5 +1,6 @@
 {
   "header": "Request your reference number to get access to your eVisa",
   "serviceName": "Request your reference number to get access to your eVisa",
-  "error": "Error"
+  "error": "Error",
+  "uploading": "Uploading your photo..."
 }

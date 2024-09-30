@@ -7,7 +7,7 @@ module.exports = {
   dateLocales: 'en-GB',
   dateFormat: {
     day: '2-digit',
-    month: 'long',
+    month: '2-digit',
     year: 'numeric'
   },
   env: env,
@@ -28,7 +28,8 @@ module.exports = {
       'image/jpeg',
       'image/jpg',
       'image/png',
-      'image/gif'
+      'image/gif',
+      'application/pdf'
     ],
     documentCategories: {
       'identity-documents': {
