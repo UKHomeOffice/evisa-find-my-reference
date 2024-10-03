@@ -189,18 +189,14 @@ spec:
             {{ end }}
           args:
             - --listen=:3001
-            - --upstream-url=https://127.0.0.1:3000
+            - --upstream-url=http://127.0.0.1:3000
             # URls that you wish to protect.
             - --resources=uri=/*
-            - --tls-cert=/certs/tls.crt
-            - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
-            - --http-only-cookie=true
             - --enable-security-filter=true
             - --enable-request-id=true
             - --enable-logging=true
             - --enable-json-logging=true
-            - --tls-min-version=tlsv1.2
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
