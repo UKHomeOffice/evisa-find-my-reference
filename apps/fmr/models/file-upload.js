@@ -59,8 +59,6 @@ module.exports = class UploadModel extends Model {
     })
       .then(result => {
         try {
-          // eslint-disable-next-line no-console
-          console.log('FILE URL: ', result.url.replace('/file/', '/file/generate-link/').split('?')[0]);
           this.set({
             url: result.url.replace('/file/', '/file/generate-link/').split('?')[0]
           });
