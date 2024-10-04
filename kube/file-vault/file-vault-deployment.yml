@@ -167,6 +167,10 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            - name: PROXY_LISTEN
+              value: 127.0.0.1:3001
+            - name: PROXY_UPSTREAM_URL
+              value: "https://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -188,8 +192,6 @@ spec:
               value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/fmr-notprod
             {{ end }}
           args:
-            - --listen=:3001
-            - --upstream-url=http://127.0.0.1:3000
             # URls that you wish to protect.
             - --resources=uri=/*
             - --enable-default-deny=false
@@ -197,6 +199,8 @@ spec:
             - --enable-request-id=true
             - --enable-logging=true
             - --enable-json-logging=true
+            - --tls-cert=/certs/tls.crt
+            - --tls-private-key=/certs/tls.key
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
