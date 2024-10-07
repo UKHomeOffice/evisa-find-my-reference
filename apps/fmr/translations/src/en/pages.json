@@ -73,6 +73,9 @@
       "dob": {
         "label": "Your date of birth"
       },
+      "identity-documents": {
+        "label": "Your photo"
+      },
       "anything-else": {
         "label": "Additional information"
       },

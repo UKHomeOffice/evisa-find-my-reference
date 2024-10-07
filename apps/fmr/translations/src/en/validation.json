@@ -24,6 +24,14 @@
         "date": "The date must only contain numbers. For example, 31 3 1980.",
         "before": "Date of birth must be in the past"
     },
+    "file-upload": {
+        "required": "Select a file",
+        "unsaved": "Your photo could not be uploaded – try again",
+        "maxFileSize": "Your photo must be smaller than 20MB",
+        "fileType": "Your photo must be a JPG, PNG, GIF, JPEG or PDF file",
+        "virusCheck": "The file you have uploaded may have a virus. Please try a different file.",
+        "maxIdDocsUploads" : "You have already uploaded a photo, remove it to upload a new one"
+    },
     "anything-else": {
         "maxlength": "You have exceeded the 500 character limit"
     },

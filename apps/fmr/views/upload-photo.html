@@ -1,0 +1,61 @@
+{{<partials-page}} {{$encoding}}enctype="multipart/form-data" name="file-upload-form" {{/encoding}} {{$page-content}}
+  
+  {{#markdown}}photo-intro{{/markdown}}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <img src="/public//images/passport-photo.png" class="photo-sample" alt="Photo sample" class="govuk-!-width-full">
+    </div>
+    <div class="govuk-grid-column-two-thirds govuk-!-padding-left-0">
+      {{#markdown}}photo-requirements{{/markdown}}
+    </div>
+  </div>
+    
+  {{#markdown}}file-requirements{{/markdown}}
+
+  <div class="govuk-form-group govuk-!-margin-top-6" id="hofFileUpload">
+    <label class="govuk-label bold" for="file-upload">
+        {{#t}}fields.file-upload.label{{/t}}
+    </label>
+    <p id="file-upload-error-maxFileSize" class="govuk-error-message govuk-!-display-none">
+      <span id="validation-error" class="govuk-visually-hidden">{{#t}}journey.error{{/t}}:</span> {{#t}}validation.file-upload.maxFileSize{{/t}}
+    </p>
+    <p id="file-upload-error-fileType" class="govuk-error-message govuk-!-display-none">
+      <span id="validation-error" class="govuk-visually-hidden">{{#t}}journey.error{{/t}}:</span> {{#t}}validation.file-upload.fileType{{/t}}
+    </p>
+    <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="identity-documents">
+    <div id="upload-page-loading-spinner" class="spinner-container">
+      <div class="spinner-loader"></div>
+      <span class="spinner-message">{{#t}}journey.uploading{{/t}}</span>
+    </div>
+  </div>
+
+  {{^values.identity-documents}}
+  <h2 class="govuk-heading-m">No documents uploaded</h2>
+  {{/values.identity-documents}}
+
+  {{#values.identity-documents.length}}
+  <h2 class="govuk-heading-m">You have uploaded {{values.identity-documents.length}} file(s)</h2>
+
+  <div id="uploaded-documents" class="govuk-width-container">
+    {{#values.identity-documents}}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
+          {{name}}
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+          <a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a>
+        </div>
+      </div>
+      <div class="file-upload-hrline"></div>
+    {{/values.identity-documents}}
+  </div>
+
+  {{/values.identity-documents.length}}
+
+  <button class="govuk-button govuk-button" name="continueWithoutUpload" value="identity-documents">
+    {{#t}}buttons.continue{{/t}}
+  </button>
+
+  {{/page-content}}
+  {{/partials-page}}

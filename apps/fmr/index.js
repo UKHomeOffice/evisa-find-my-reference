@@ -1,5 +1,7 @@
 const hof = require('hof');
 const Summary = hof.components.summary;
+const SaveDocument = require('./behaviours/save-document');
+const RemoveDocument = require('./behaviours/remove-document');
 
 module.exports = {
   name: 'fmr',
@@ -51,7 +53,8 @@ module.exports = {
     },
     '/upload-photo': {
       next: '/any-other-information',
-      fields: []
+      behaviours: [SaveDocument('identity-documents', 'file-upload'), RemoveDocument('identity-documents')],
+      fields: ['file-upload']
     },
     '/any-other-information': {
       next: '/contact',

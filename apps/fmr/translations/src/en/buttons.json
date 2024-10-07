@@ -5,5 +5,6 @@
   "submit": "Submit request",
   "new-request": "Request another check",
   "upload-file": "Upload",
-  "upload-another-file": "Upload another file"
+  "upload-another-file": "Upload another file",
+  "delete": "Remove"
 }
