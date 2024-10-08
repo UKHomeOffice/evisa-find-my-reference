@@ -136,10 +136,8 @@ spec:
               value: "no"
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - name: DEBUG
               value: "*"
-            {{ end }}
           securityContext:
             runAsNonRoot: true
 
