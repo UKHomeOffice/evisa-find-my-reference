@@ -181,16 +181,6 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
             {{ end }}
-            - name: PROXY_DISCOVERY_URL
-            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-              value: https://acp-sso.prod.acp.homeoffice.gov.uk/realms/fmr
-            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://acp-sso.prod.acp.homeoffice.gov.uk/realms/fmr
-            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-              value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/fmr-notprod
-            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/fmr-notprod
-            {{ end }}
           args:
             # URls that you wish to protect.
             - --resources=uri=/*
