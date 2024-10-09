@@ -39,7 +39,7 @@
     }
   },
   "request-sent": {
-    "header": "Request sent",
+    "confirmation": "Request sent",
     "reference-number": "Your request number"
   },
   "confirm": {

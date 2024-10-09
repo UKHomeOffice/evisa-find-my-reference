@@ -47,4 +47,68 @@ const formatDate = date => {
  */
 const sanitiseFilename = filename => filename?.replace(/^(.{2}).*(.{2}\.[^.]+)$/, '$1**REDACTED**$2');
 
-module.exports = { getLabel, formatDate, sanitiseFilename };
+/**
+ * Generates a useful error message from a typical GovUk Notify Node.js client error reponse object
+ *
+ * This function is relatively specific to Error objects created by notifications-node-client.
+ * It will return at a minimum error.message from the Error object passed in.
+ *
+ * @param {object} error - An Error object.
+ * @returns {string} - An error message for GovUK Notify containing key causal information.
+ */
+const genNotifyErrorMsg = error => {
+  const errorDetails = error.response?.data ? `Cause: ${JSON.stringify(error.response.data)}` : '';
+  const errorCode = error.code ? `${error.code} -` : '';
+  return `${errorCode} ${error.message}; ${errorDetails}`;
+};
+
+/**
+ * Parses a list of documents and returns a formatted string with each document's name and URL.
+ *
+ * @param {Array} documents - An array of document objects, each containing a `name` and `url` property.
+ * @returns {string} - A formatted string with each document's name as a markdown link, separated by new lines.
+ *
+ * @example
+ * // Input
+ * const documents = [
+ *   { name: 'Document 1', url: 'http://example.com/doc1' },
+ *   { name: 'Document 2', url: 'http://example.com/doc2' }
+ * ];
+ *
+ * // Output
+ * // [Document 1](http://example.com/doc1)
+ * // [Document 2](http://example.com/doc2)
+ * const result = parseDocumentList(documents);
+ * console.log(result);
+ */
+const parseDocumentList = documents => {
+  return Array.isArray(documents) ? documents.map(doc => `[${doc.name}](${doc.url})`).join('\n') : '';
+};
+
+/**
+ * Constructs a full name from given names and a surname.
+ *
+ * @param {string} givenNames - The given names (first and middle names).
+ * @param {string} surname - The surname (last name).
+ * @returns {string} - The full name, which is a combination of given names and surname.
+ *
+ * @example
+ * // returns 'John Doe'
+ * getFullName('John', 'Doe');
+ *
+ * @example
+ * // returns 'Doe'
+ * getFullName('', 'Doe');
+ */
+const getFullName = (givenNames, surname) => {
+  const fullName = givenNames ? `${givenNames} ${surname}` : surname;
+  return fullName;
+};
+
+module.exports = { getLabel,
+  formatDate,
+  sanitiseFilename,
+  genNotifyErrorMsg,
+  parseDocumentList,
+  getFullName
+};

@@ -2,6 +2,7 @@ const hof = require('hof');
 const Summary = hof.components.summary;
 const SaveDocument = require('./behaviours/save-document');
 const RemoveDocument = require('./behaviours/remove-document');
+const submitRequest = require('./behaviours/submit-request');
 
 module.exports = {
   name: 'fmr',
@@ -94,7 +95,7 @@ module.exports = {
       ]
     },
     '/check-answers': {
-      behaviours: [Summary],
+      behaviours: [Summary, submitRequest],
       sections: require('./sections/summary-data-sections'),
       template: 'summary',
       next: '/request-sent'

@@ -15,7 +15,8 @@ module.exports = {
     notifyApiKey: process.env.NOTIFY_KEY,
     caseworkerEmail: process.env.CASEWORKER_EMAIL,
     userConfirmationTemplateId: process.env.USER_CONFIRMATION_TEMPLATE_ID,
-    businessConfirmationTemplateId: process.env.BUSINESS_CONFIRMATION_TEMPLATE_ID
+    businessConfirmationTemplateId: process.env.BUSINESS_CONFIRMATION_TEMPLATE_ID,
+    replyToId: process.env.EMAIL_REPLY_TO_ID
   },
   redis: {
     port: process.env.REDIS_PORT || '6379',
@@ -52,5 +53,6 @@ module.exports = {
     password: process.env.KEYCLOAK_PASSWORD,
     clientId: process.env.KEYCLOAK_CLIENT_ID,
     secret: process.env.KEYCLOAK_SECRET
-  }
+  },
+  uniqueRefNumberPrefix: 'FMR-'
 };
