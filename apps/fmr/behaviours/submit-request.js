@@ -59,7 +59,7 @@ module.exports = superclass => class extends superclass {
         nationality: req.sessionModel.get('country-of-nationality'),
         sex: getLabel('sex', req.sessionModel.get('sex')),
         identity_documents: parseDocumentList(req.sessionModel.get('identity-documents')),
-        anything_else: req.sessionModel.get('anything-else') ?? 'none provided',
+        anything_else: req.sessionModel.get('anything-else') || 'none provided',
         how_to_contact_you: getLabel('how-to-contact-you', req.sessionModel.get('how-to-contact-you')),
         contact_details: req.sessionModel.get('how-to-contact-you') === 'email' ?
           req.sessionModel.get('email') : req.sessionModel.get('formatted-address'),
