@@ -51,7 +51,7 @@ module.exports = superclass => class extends superclass {
         has_given_names: req.sessionModel.get('given-names') ? 'yes' : 'no',
         given_names: req.sessionModel.get('given-names') ?
           req.sessionModel.get('given-names') : '',
-        surname_name: req.sessionModel.get('surname'),
+        surname: req.sessionModel.get('surname'),
         identity: getLabel('identity', req.sessionModel.get('identity')),
         has_identity_reason: req.sessionModel.get('identity') === 'no' ? 'yes' : 'no',
         identity_reason: req.sessionModel.get('identity') === 'no' ? req.sessionModel.get('identity-reason') : '',
