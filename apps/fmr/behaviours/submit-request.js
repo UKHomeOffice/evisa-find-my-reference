@@ -53,8 +53,8 @@ module.exports = superclass => class extends superclass {
           req.sessionModel.get('given-names') : '',
         surname_name: req.sessionModel.get('surname'),
         identity: getLabel('identity', req.sessionModel.get('identity')),
-        has_identity_reason: req.sessionModel.get('identity') == 'no' ? 'yes' : 'no',
-        identity_reason: req.sessionModel.get('identity') == 'no' ? req.sessionModel.get('identity-reason') : '',
+        has_identity_reason: req.sessionModel.get('identity') === 'no' ? 'yes' : 'no',
+        identity_reason: req.sessionModel.get('identity') === 'no' ? req.sessionModel.get('identity-reason') : '',
         date_of_birth: formatDate(req.sessionModel.get('dob')),
         nationality: req.sessionModel.get('country-of-nationality'),
         sex: getLabel('sex', req.sessionModel.get('sex')),
@@ -65,11 +65,13 @@ module.exports = superclass => class extends superclass {
           req.sessionModel.get('email') : req.sessionModel.get('formatted-address'),
         someone_else: getLabel('someone-else', req.sessionModel.get('someone-else')),
         is_someone_else: req.sessionModel.get('someone-else'),
-        someone_else_name: req.sessionModel.get('someone-else') == 'yes' && req.sessionModel.get('someone-else-name') ?
+        someone_else_name: req.sessionModel.get('someone-else') === 'yes' &&
+          req.sessionModel.get('someone-else-name') ?
           req.sessionModel.get('someone-else-name') : '',
-        someone_else_email: req.sessionModel.get('someone-else') == 'yes' && req.sessionModel.get('someone-else-email') ?
+        someone_else_email: req.sessionModel.get('someone-else') === 'yes' &&
+          req.sessionModel.get('someone-else-email') ?
           req.sessionModel.get('someone-else-email') : '',
-        someone_else_type: req.sessionModel.get('someone-else') == 'yes' && req.sessionModel.get('someone-else-type') ?
+        someone_else_type: req.sessionModel.get('someone-else') === 'yes' && req.sessionModel.get('someone-else-type') ?
           getLabel('someone-else-type', req.sessionModel.get('someone-else-type')) : ''
       });
 
