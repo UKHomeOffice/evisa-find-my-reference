@@ -34,9 +34,9 @@ class EmailProps {
 module.exports = superclass => class extends superclass {
   async successHandler(req, res, next) {
     try {
-	    const crs = await import('crypto-random-string');
-	    const uniqueRefNumber = crs.default({ length: 6, characters: 'ABCDEFGHJKMNPRTUVWXY0123456789' });
-	    req.sessionModel.set('uniqueRefNumber', `${config.uniqueRefNumberPrefix}${uniqueRefNumber}`);
+      const crs = await import('crypto-random-string');
+      const uniqueRefNumber = crs.default({ length: 6, characters: 'ABCDEFGHJKMNPRTUVWXY0123456789' });
+      req.sessionModel.set('uniqueRefNumber', `${config.uniqueRefNumberPrefix}${uniqueRefNumber}`);
     } catch (error) {
       const errorMsg = `Failed to generate unique reference number: ${error}`;
       req.log('error', errorMsg);
