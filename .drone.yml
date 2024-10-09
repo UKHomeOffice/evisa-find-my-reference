@@ -9,7 +9,7 @@ environment:
   STG_ENV: sas-fmr-stg
   UAT_ENV: sas-fmr-uat
   BRANCH_ENV: sas-fmr-branch
-  PRODUCTION_URL: www.request-reference-evisa.homeoffice.gov.uk
+  PRODUCTION_URL: request-reference-evisa.homeoffice.gov.uk
   IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
   IMAGE_REPO: sas/fmr
   GIT_REPO: UKHomeOffice/evisa-find-my-reference
@@ -371,7 +371,7 @@ steps:
     environment:
         IMAGE_NAME: sas/fmr:${DRONE_COMMIT_SHA}
         SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
-        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL --dependency-tree
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
@@ -384,7 +384,7 @@ steps:
     pull: always
     environment:
         IMAGE_NAME: node:20.17.0-alpine3.20@sha256:2cc3d19887bfea8bf52574716d5f16d4668e35158de866099711ddfb2b16b6e0
-        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL --dependency-tree
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
