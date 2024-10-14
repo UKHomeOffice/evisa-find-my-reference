@@ -113,6 +113,8 @@ spec:
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - name: DEBUG
               value: "*"
+            - name: TEST_BOOLEN
+              value: true
             {{ end }}
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:
