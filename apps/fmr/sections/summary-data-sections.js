@@ -1,3 +1,5 @@
+const { formatDate} = require('../../../utils');
+
 module.exports = {
   'personal-details': {
     steps: [
@@ -27,7 +29,8 @@ module.exports = {
       },
       {
         step: '/date-birth',
-        field: 'dob'
+        field: 'dob',
+        parse: val => formatDate(val)
       },
       {
         step: '/upload-photo',
