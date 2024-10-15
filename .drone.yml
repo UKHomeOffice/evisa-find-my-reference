@@ -9,7 +9,7 @@ environment:
   STG_ENV: sas-fmr-stg
   UAT_ENV: sas-fmr-uat
   BRANCH_ENV: sas-fmr-branch
-  PRODUCTION_URL: request-reference-evisa.homeoffice.gov.uk
+  PRODUCTION_URL: www.request-reference-evisa.homeoffice.gov.uk
   IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
   IMAGE_REPO: sas/fmr
   GIT_REPO: UKHomeOffice/evisa-find-my-reference
@@ -42,7 +42,7 @@ sonar_scanner: &sonar_scanner
   image: quay.io/ukhomeofficedigital/sonar-scanner-nodejs:latest
   commands:
     - sonar-scanner -Dproject.settings=./sonar-project.properties
-  
+
 ui_integration_tests: &ui_integration_tests
   pull: if-not-exists
   image: node:20.17.0-alpine3.20@sha256:2cc3d19887bfea8bf52574716d5f16d4668e35158de866099711ddfb2b16b6e0
@@ -172,8 +172,8 @@ steps:
       tags:
         - ${DRONE_COMMIT_SHA}
     when:
-      branch: 
-        include: 
+      branch:
+        include:
           - master
           - feature/*
       event: [push, pull_request]
@@ -265,7 +265,7 @@ steps:
     when:
       branch: master
       event: push
-      
+
    # Deploy to Staging environment
   - name: deploy_to_stg
     pull: if-not-exists
@@ -338,7 +338,7 @@ steps:
     when:
       cron: tear_down_pr_envs
       event: cron
-  
+
   # CRON job steps that runs security scans using Trivy
   - name: cron_clone_repos
     image: alpine/git
@@ -404,7 +404,7 @@ steps:
             *✘ {{ uppercasefirst build.status }}*: CRON Job `tear_down_pr_envs` for *E-Visa Find My Reference Form (FMR)* has failed.
 
             Branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | Commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-            
+
             *Build <{{build.link}}|#{{build.number}}>*
       username: Drone_CI
       webhook:
@@ -413,7 +413,7 @@ steps:
       cron: tear_down_pr_envs
       event: cron
       status: failure
-  
+
   - name: cron_notify_slack_security_scans
     pull: if-not-exists
     image: plugins/slack
@@ -425,7 +425,7 @@ steps:
             *✘ {{ uppercasefirst build.status }}*: CRON Job `security_scans` for *E-Visa Find My Reference Form (FMR)* has failed.
 
             Branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | Commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-            
+
             *Build <{{build.link}}|#{{build.number}}>*
       username: Drone_CI
       webhook:
