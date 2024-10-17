@@ -114,6 +114,9 @@ spec:
             - name: DEBUG
               value: "*"
             {{ end }}
+            # Preventing search engines from indexing all pages
+            - name: DISALLOW_INDEXING
+              value: "true"
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:
             httpGet:

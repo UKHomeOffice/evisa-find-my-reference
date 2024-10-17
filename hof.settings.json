@@ -1,5 +1,5 @@
 {
-  "appName": "Request your reference number to get access to your eVisa",
+  "appName": "Request your reference number or book a video appointment to get access to your eVisa",
   "theme": "govUK",
   "behaviours": [
     "hof/components/clear-session"
