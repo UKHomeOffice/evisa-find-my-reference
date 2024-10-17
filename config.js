@@ -54,5 +54,6 @@ module.exports = {
     clientId: process.env.KEYCLOAK_CLIENT_ID,
     secret: process.env.KEYCLOAK_SECRET
   },
-  uniqueRefNumberPrefix: 'FMR-'
+  uniqueRefNumberPrefix: 'FMR-',
+  disallowIndexing: process.env.DISALLOW_INDEXING === 'true'
 };
