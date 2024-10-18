@@ -11,8 +11,7 @@ const steps = {
     fields: [],
     template: 'start',
     sidepanel: true,
-    fullwidth: true,
-    isNeedHelpHidden: true
+    fullwidth: true
   },
   '/identity': {
     next: '/name',
@@ -26,36 +25,44 @@ const steps = {
         }
       }
     ],
+    showNeedHelp: true,
     backLink: ' ' // workaround to show Back link to the root of the app
   },
   '/identity-reason': {
     next: '/name',
-    fields: ['identity-reason']
+    fields: ['identity-reason'],
+    showNeedHelp: true
   },
   '/name': {
     next: '/sex',
-    fields: ['given-names', 'surname']
+    fields: ['given-names', 'surname'],
+    showNeedHelp: true
   },
   '/sex': {
     next: '/nationality',
-    fields: ['sex']
+    fields: ['sex'],
+    showNeedHelp: true
   },
   '/nationality': {
     next: '/date-birth',
-    fields: ['country-of-nationality']
+    fields: ['country-of-nationality'],
+    showNeedHelp: true
   },
   '/date-birth': {
     next: '/upload-photo',
-    fields: ['dob']
+    fields: ['dob'],
+    showNeedHelp: true
   },
   '/upload-photo': {
     next: '/any-other-information',
     behaviours: [SaveDocument('identity-documents', 'file-upload'), RemoveDocument('identity-documents')],
-    fields: ['file-upload']
+    fields: ['file-upload'],
+    showNeedHelp: true
   },
   '/any-other-information': {
     next: '/contact',
-    fields: ['anything-else']
+    fields: ['anything-else'],
+    showNeedHelp: true
   },
   '/contact': {
     next: '/someone-else',
@@ -67,7 +74,8 @@ const steps = {
       'town-or-city',
       'county',
       'postcode'
-    ]
+    ],
+    showNeedHelp: true
   },
   '/someone-else': {
     next: '/check-answers',
@@ -80,7 +88,8 @@ const steps = {
           value: 'yes'
         }
       }
-    ]
+    ],
+    showNeedHelp: true
   },
   '/someone-else-details': {
     next: '/check-answers',
@@ -88,18 +97,19 @@ const steps = {
       'someone-else-name',
       'someone-else-email',
       'someone-else-type'
-    ]
+    ],
+    showNeedHelp: true
   },
   '/check-answers': {
     behaviours: [Summary, submitRequest],
     sections: require('./sections/summary-data-sections'),
     template: 'summary',
-    next: '/request-sent'
+    next: '/request-sent',
+    showNeedHelp: true
   },
   '/request-sent': {
     clearSession: true,
-    backLink: false,
-    isNeedHelpHidden: true
+    backLink: false
   }
 };
 
