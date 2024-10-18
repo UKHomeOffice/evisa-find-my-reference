@@ -136,6 +136,8 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - setup
 
   - name: sonar_scanner
     <<: *sonar_scanner
