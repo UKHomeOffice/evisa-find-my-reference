@@ -141,7 +141,11 @@ module.exports = {
     }
   },
   'address-line-2': {
-    mixins: 'input-text'
+    mixins: 'input-text',
+    dependent: {
+      field: 'how-to-contact-you',
+      value: 'uk-address'
+    }
   },
   'town-or-city': {
     mixins: 'input-text',
@@ -153,7 +157,11 @@ module.exports = {
   },
   county: {
     mixins: 'input-text',
-    className: ['govuk-input', 'govuk-!-width-two-thirds']
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'how-to-contact-you',
+      value: 'uk-address'
+    }
   },
   postcode: {
     mixins: 'input-text',
