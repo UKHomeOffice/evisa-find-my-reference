@@ -209,3 +209,8 @@ pre.looped-records {
 .govuk-fieldset__heading{
   font-family: "GDS Transport", arial, sans-serif;
 }
+
+.govuk-radios fieldset {
+  width: auto;
+  max-width: 100%;
+}
