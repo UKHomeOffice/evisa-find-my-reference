@@ -223,7 +223,6 @@ steps:
       event: pull_request
     depends_on:
       - clone_repos
-      - build_image
       - image_to_ecr
 
   - name: deploy_to_uat
