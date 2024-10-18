@@ -147,8 +147,6 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
-    depends_on:
-      - setup
 
   - name: build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
@@ -242,6 +240,9 @@ steps:
         include:
           - master
       event: push
+    depends_on:
+      - clone_repos
+      - image_to_ecr
 
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
@@ -278,6 +279,8 @@ steps:
     when:
       branch: master
       event: push
+    depends_on:
+      - get_pr_branch
 
    # Deploy to Staging environment
   - name: deploy_to_stg
@@ -293,6 +296,9 @@ steps:
     when:
       branch: master
       event: push
+    depends_on:
+      - clone_repos
+      - image_to_ecr
 
   ## Checks a build being promoted has passed, is on master which effectively means a healthy build on Staging
   - name: sanity_check_build_prod
