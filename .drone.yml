@@ -162,6 +162,8 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - docker
 
   - name: image_to_ecr
     image: plugins/ecr
@@ -327,6 +329,8 @@ steps:
     when:
       target: PROD
       event: promote
+    depends_on:
+      - sanity_check_build_prod
 
   # Deploy to Production environment
   - name: deploy_to_prod
@@ -342,6 +346,8 @@ steps:
     when:
       target: PROD
       event: promote
+    depends_on:
+      - clone_repos_prod
 
   # CRON job step that tears down our pull request UAT environments
   - name: cron_tear_down
