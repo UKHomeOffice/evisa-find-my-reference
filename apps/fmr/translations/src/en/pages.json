@@ -89,5 +89,8 @@
         "label": "Requesting on behalf of someone else"
       }
     }
+  },
+  "accessibility": {
+    "header": "Accessibility statement for Request your reference number or book a video appointment to get access to your eVisa"
   }
 }

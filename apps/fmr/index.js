@@ -103,7 +103,9 @@ const steps = {
   }
 };
 
-const pages = {};
+const pages = {
+  '/accessibility': 'static/accessibility'
+};
 
 if (disallowIndexing) {
   pages['/robots.txt'] = 'static/robots';
