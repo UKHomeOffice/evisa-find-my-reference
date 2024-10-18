@@ -125,6 +125,8 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - setup
 
   - name: unit_tests
     <<: *unit_tests
@@ -134,6 +136,8 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - setup
 
   - name: sonar_scanner
     <<: *sonar_scanner
@@ -143,6 +147,8 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - setup
 
   - name: build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
@@ -177,6 +183,8 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - build_image
 
   # Trivy Security Scannner for scanning nodejs packages in Yarn
   - name: scan_node_packages
@@ -194,6 +202,8 @@ steps:
       ALLOW_CVE_LIST_FILE: hof-services-config/E_Visa_Find_My_Reference_Form/trivy/.trivyignore.yaml
     when:
       event: [push, pull_request]
+    depends_on:
+      - image_to_ecr
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
@@ -213,6 +223,10 @@ steps:
           - master
           - feature/*
       event: pull_request
+    depends_on:
+      - clone_repos
+      - build_image
+      - image_to_ecr
 
   - name: deploy_to_uat
     pull: if-not-exists
