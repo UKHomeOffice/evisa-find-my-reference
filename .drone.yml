@@ -150,12 +150,14 @@ steps:
 
   - name: build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+    environment:
+      DOCKER_HOST: tcp://dind:2375
     commands:
       - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
       - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
     volumes:
       - name: dockersock
-        path: /var/run
+        path: /var/run/docker.sock
     when:
       branch:
         include:
@@ -461,8 +463,18 @@ steps:
       status: failure
 
 services:
-  - name: docker
+  # - name: docker
+  #   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+  - name: dind
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+    privileged: true
+    command:
+      - "--host=tcp://0.0.0.0:2375"
+      - "--storage-driver=overlay2"
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+
 
   # Redis session setup in background so ui integration tests can run
   - name: session
