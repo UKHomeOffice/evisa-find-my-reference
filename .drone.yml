@@ -22,16 +22,18 @@ trigger:
   branch:
     - feature/*
     - master
-
-linting: &linting
+  
+node_image: &node_image
   pull: if-not-exists
   image: node:20.17.0-alpine3.20@sha256:2cc3d19887bfea8bf52574716d5f16d4668e35158de866099711ddfb2b16b6e0
+
+linting: &linting
+  <<: *node_image
   commands:
     - yarn run test:lint
 
 unit_tests: &unit_tests
-  pull: if-not-exists
-  image: node:20.17.0-alpine3.20@sha256:2cc3d19887bfea8bf52574716d5f16d4668e35158de866099711ddfb2b16b6e0
+  <<: *node_image
   environment:
     NOTIFY_STUB: true
   commands:
