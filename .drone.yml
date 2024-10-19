@@ -154,24 +154,24 @@ steps:
           - feature/*
       event: [push, pull_request]
 
-  # - name: build_image
-  #   pull: if-not-exists
-  #   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
-  #   commands:
-  #     - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
-  #     - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
-  #   volumes:
-  #     - name: dockersock
-  #       path: /var/run
-  #   when:
-  #     branch:
-  #       include:
-  #         - master
-  #         - feature/*
-  #     event: [push, pull_request]
-  #   depends_on:
-  #     - linting
-  #     - unit_tests
+  - name: build_image
+    pull: if-not-exists
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+    commands:
+      - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
+      - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
+    volumes:
+      - name: dockersock
+        path: /var/run
+    when:
+      branch:
+        include:
+          - master
+          - feature/*
+      event: [push, pull_request]
+    depends_on:
+      - linting
+      - unit_tests
 
   - name: image_to_ecr
     pull: if-not-exists
@@ -205,7 +205,7 @@ steps:
         cpu: 1000
         memory: 1024Mi
     environment:
-      IMAGE_NAME: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/fmr:${DRONE_COMMIT_SHA}
+      IMAGE_NAME: sas/fmr:${DRONE_COMMIT_SHA}
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree --format table
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
@@ -216,8 +216,7 @@ steps:
     when:
       event: [push, pull_request]
     depends_on:
-      - clone_repos
-      - image_to_ecr
+      - build_image
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
