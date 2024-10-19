@@ -149,24 +149,24 @@ steps:
           - feature/*
       event: [push, pull_request]
 
-  - name: build_image
-    pull: if-not-exists
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
-    commands:
-      - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
-      - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
-    volumes:
-      - name: dockersock
-        path: /var/run
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: [push, pull_request]
-    depends_on:
-      - linting
-      - unit_tests
+  # - name: build_image
+  #   pull: if-not-exists
+  #   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+  #   commands:
+  #     - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
+  #     - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
+  #   volumes:
+  #     - name: dockersock
+  #       path: /var/run
+  #   when:
+  #     branch:
+  #       include:
+  #         - master
+  #         - feature/*
+  #     event: [push, pull_request]
+  #   depends_on:
+  #     - linting
+  #     - unit_tests
 
   - name: image_to_ecr
     pull: if-not-exists
@@ -188,7 +188,8 @@ steps:
           - feature/*
       event: [push, pull_request]
     depends_on:
-      - build_image
+      - linting
+      - unit_tests
 
   # Trivy Security Scannner for scanning nodejs packages in Yarn
   - name: scan_node_packages
