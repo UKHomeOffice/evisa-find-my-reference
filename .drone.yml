@@ -46,8 +46,7 @@ sonar_scanner: &sonar_scanner
     - sonar-scanner -Dproject.settings=./sonar-project.properties
 
 ui_integration_tests: &ui_integration_tests
-  pull: if-not-exists
-  image: node:20.17.0-alpine3.20@sha256:2cc3d19887bfea8bf52574716d5f16d4668e35158de866099711ddfb2b16b6e0
+  <<: *node_image
   environment:
     NOTIFY_STUB: true
   commands:
@@ -105,8 +104,7 @@ steps:
       event: [push, pull_request]
 
   - name: setup
-    pull: if-not-exists
-    image: node:20.17.0-alpine3.20@sha256:2cc3d19887bfea8bf52574716d5f16d4668e35158de866099711ddfb2b16b6e0
+    <<: *node_image
     environment:
       NOTIFY_STUB: true
     commands:
