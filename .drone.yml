@@ -70,6 +70,7 @@ acceptance_tests: &acceptance_tests
 
 steps:
   - name: clone_repos
+    pull: if-not-exists
     image: alpine/git
     environment:
       DRONE_GIT_USERNAME:
@@ -149,6 +150,7 @@ steps:
       event: [push, pull_request]
 
   - name: build_image
+    pull: if-not-exists
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
     commands:
       - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
@@ -167,6 +169,7 @@ steps:
       - unit_tests
 
   - name: image_to_ecr
+    pull: if-not-exists
     image: plugins/ecr
     settings:
       access_key:
@@ -319,6 +322,7 @@ steps:
       event: promote
 
   - name: clone_repos_prod
+    pull: if-not-exists
     image: alpine/git
     environment:
       DRONE_GIT_USERNAME:
@@ -367,6 +371,7 @@ steps:
 
   # CRON job steps that runs security scans using Trivy
   - name: cron_clone_repos
+    pull: if-not-exists
     image: alpine/git
     environment:
       DRONE_GIT_USERNAME:
@@ -380,6 +385,7 @@ steps:
       event: cron
 
   - name: cron_build_image
+    pull: if-not-exists
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
     commands:
       - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
@@ -421,7 +427,7 @@ steps:
   # Slack notification upon a CRON job fail
   - name: cron_notify_slack_tear_down_pr_envs
     pull: if-not-exists
-    image: plugins/slack
+    image: plugins/slack:1.4.1
     settings:
       channel: sas-hof-build-notify
       failure: ignore
@@ -442,7 +448,7 @@ steps:
 
   - name: cron_notify_slack_security_scans
     pull: if-not-exists
-    image: plugins/slack
+    image: plugins/slack:1.4.1
     settings:
       channel: sas-hof-security
       failure: ignore
