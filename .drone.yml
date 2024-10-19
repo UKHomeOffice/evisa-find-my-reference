@@ -467,7 +467,6 @@ services:
   #   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
   - name: dind
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
-    privileged: true
     command:
       - "--host=tcp://0.0.0.0:2375"
       - "--storage-driver=overlay2"
