@@ -164,8 +164,6 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
-    depends_on:
-      - docker
 
   - name: image_to_ecr
     image: plugins/ecr
