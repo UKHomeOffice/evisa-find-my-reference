@@ -52,14 +52,12 @@ module.exports = {
   'given-names': {
     mixin: 'input-text',
     validate: [validateText],
-    className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    labelClassName: 'govuk-label--s'
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   surname: {
     mixin: 'input-text',
     validate: ['required', validateText],
-    className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    labelClassName: 'govuk-label--s'
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   sex: {
     mixin: 'radio-group',
@@ -190,8 +188,7 @@ module.exports = {
   'someone-else-name': {
     mixin: 'input-text',
     validate: ['required', validateText],
-    className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    labelClassName: 'govuk-label--s'
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'someone-else-email': {
     mixin: 'input-text',
@@ -200,8 +197,7 @@ module.exports = {
       'email',
       { type: 'maxlength', arguments: 254 }
     ],
-    className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    labelClassName: 'govuk-label--s'
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'someone-else-type': {
     mixin: 'radio-group',
