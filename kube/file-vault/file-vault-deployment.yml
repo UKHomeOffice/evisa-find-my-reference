@@ -171,7 +171,7 @@ spec:
               value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-              value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
+              value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
