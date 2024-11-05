@@ -38,7 +38,7 @@ module.exports = superclass => class extends superclass {
       const uniqueRefNumber = crs.default({ length: 6, characters: 'ABCDEFGHJKMNPRTUVWXY0123456789' });
       req.sessionModel.set('uniqueRefNumber', `${config.uniqueRefNumberPrefix}${uniqueRefNumber}`);
     } catch (error) {
-      const errorMsg = `Failed to generate unique reference number: ${error}`;
+      const errorMsg = `Failed to generate unique request number: ${error}`;
       req.log('error', errorMsg);
       return next(Error(errorMsg));
     }
