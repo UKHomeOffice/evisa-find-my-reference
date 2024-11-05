@@ -1,10 +1,10 @@
 {
   "name": "evisa-find-my-reference",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "eVisa Find My Reference", 
   "main": "index.js",
   "engines": {
-    "node": ">=20.17.0 <21.0.0"
+    "node": ">=20.18.0 <21.0.0"
   },
   "scripts": {
     "start": "node server.js",
@@ -29,7 +29,7 @@
     "bl": "^6.0.16",
     "busboy": "^1.6.0",
     "crypto-random-string": "^5.0.0",
-    "form-data": "4.0.0",
+    "form-data": "^4.0.1",
     "hof": "^21.1.1",
     "notifications-node-client": "^8.2.1"
   },

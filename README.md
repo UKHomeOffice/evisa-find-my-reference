@@ -27,7 +27,7 @@ eVisa Find My Reference (FMR) used by the public to request their reference numb
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) - v.20.17.0
+- [Node.js](https://nodejs.org/en/) - v.20.18.0
 - [Redis server](http://redis.io/download) running on default port 6379
 - [File Vault](https://github.com/UKHomeOffice/file-vault) Service - running port 3000
 
