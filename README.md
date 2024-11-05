@@ -8,7 +8,7 @@ eVisa Find My Reference (FMR) used by the public to request their reference numb
 - The form facilitates the upload of required documents, such as the applicant's photo.
 - The user is able to review all the answers provided to confirm their details prior to submission.
 - Once the application is submitted, automated notifications are sent to the business/employee and the user.
-- The notification email will include a unique reference number that can be used to refer to the submission.
+- The notification email will include a unique request number that can be used to refer to the submission.
 - All uploaded documents are stored in encrypted form, links to the uploaded documents will be listed in the email to the business/caseworker and can only be accessed after authentication.
 
 ## Getting Started
