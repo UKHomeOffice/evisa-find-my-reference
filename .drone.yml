@@ -21,7 +21,7 @@ environment:
 trigger:
   branch:
     - feature/*
-    - master
+    - develop
   
 node_image: &node_image
   pull: if-not-exists
@@ -82,7 +82,7 @@ steps:
     when:
       branch:
         include:
-        - master
+        - develop
         - feature/*
       event: [push, pull_request]
 
@@ -119,7 +119,7 @@ steps:
     when:
       branch:
         include:
-        - master
+        - develop
         - feature/*
       event: [push, pull_request]
 
@@ -128,7 +128,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
           - feature/*
       event: [push, pull_request]
     depends_on:
@@ -139,7 +139,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
           - feature/*
       event: [push, pull_request]
     depends_on:
@@ -150,7 +150,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
           - feature/*
       event: [push, pull_request]
 
@@ -166,7 +166,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
           - feature/*
       event: [push, pull_request]
     depends_on:
@@ -189,7 +189,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
           - feature/*
       event: [push, pull_request]
     depends_on:
@@ -233,7 +233,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
           - feature/*
       event: pull_request
     depends_on:
@@ -253,7 +253,7 @@ steps:
     when:
       branch:
         include:
-          - master
+          - develop
       event: push
     depends_on:
       - clone_repos
@@ -274,7 +274,7 @@ steps:
     commands:
       - drone build info $GIT_REPO $DRONE_BUILD_NUMBER --format {{.Message}} | grep -o '[^ ]\+$' -m1 | sed 's|UKHomeOffice/||g' | tr '[:upper:]' '[:lower:]' | tr '/' '-' > /root/.dockersock/branch_name.txt
     when:
-      branch: master
+      branch: develop
       event: push
 
   # Tear down pull request UAT environment
@@ -292,7 +292,7 @@ steps:
     commands:
       - bin/deploy.sh tear_down
     when:
-      branch: master
+      branch: develop
       event: push
     depends_on:
       - get_pr_branch
@@ -310,7 +310,7 @@ steps:
       - bin/deploy.sh $${STG_ENV}
     when:
       branch: master
-      event: push
+      event: tag
     depends_on:
       - clone_repos
       - image_to_ecr
