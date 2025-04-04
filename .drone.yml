@@ -213,7 +213,7 @@ steps:
       ALLOW_CVE_LIST_FILE: hof-services-config/E_Visa_Find_My_Reference_Form/trivy/.trivyignore.yaml
     commands:
       - trivy image --severity MEDIUM,HIGH,CRITICAL --dependency-tree --scanners vuln sas/fmr:${DRONE_COMMIT_SHA}
-      - trivy repo $${{DRONE_REPO_BRANCH}} --severity MEDIUM,HIGH,CRITICAL --dependency-tree --scanners vuln https://github.com/UKHomeOffice/evisa-find-my-reference
+      - trivy repo --branch $${{DRONE_REPO_BRANCH}} --severity MEDIUM,HIGH,CRITICAL --dependency-tree --scanners vuln https://github.com/UKHomeOffice/evisa-find-my-reference
     volumes:
       - name: dockersock
         path: /root/.dockersock
