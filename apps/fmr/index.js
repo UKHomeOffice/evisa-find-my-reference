@@ -7,31 +7,11 @@ const { disallowIndexing } = require('../../config');
 
 const steps = {
   '/': {
-    next: '/identity',
+    next: '/name',
     fields: [],
     template: 'start',
     sidepanel: true,
     fullwidth: true
-  },
-  '/identity': {
-    next: '/name',
-    fields: ['identity'],
-    forks: [
-      {
-        target: '/identity-reason',
-        condition: {
-          field: 'identity',
-          value: 'no'
-        }
-      }
-    ],
-    showNeedHelp: true,
-    backLink: ' ' // workaround to show Back link to the root of the app
-  },
-  '/identity-reason': {
-    next: '/name',
-    fields: ['identity-reason'],
-    showNeedHelp: true
   },
   '/name': {
     next: '/sex',
