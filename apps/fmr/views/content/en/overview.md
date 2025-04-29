@@ -1,10 +1,6 @@
-<p class="govuk-!-margin-top-0">Use this service to get help creating an account to access your eVisa if either:</p>
+<p class="govuk-!-margin-top-0">Use this service to request a reference number for creating your UKVI account and accessing your eVisa if you have a valid passport, and you need to find your expired BRP number or application number.</p>
 
-- you have a valid passport, and you need to find your BRP number or application number
-
-- you do not have a valid passport - you may be invited to book a video appointment
-
-If you have a BRP card, or a valid passport with your BRP number or visa application number, you can [get access to your eVisa](https://www.gov.uk/get-access-evisa).
+If you have an expired BRP, or a valid passport with your BRP number or visa application number, you can [get access to your eVisa](https://www.gov.uk/get-access-evisa).
 
 <h2 class="govuk-heading-m">Before you start</h2>
 

@@ -1,6 +1,6 @@
 {
   "start": {
-    "header": "Request your reference number or book a video appointment to get access to your eVisa"
+    "header": "Request your reference number to get access to your eVisa"
   },
   "name": {
     "header": "What is your name?"
@@ -91,6 +91,6 @@
     }
   },
   "accessibility": {
-    "header": "Accessibility statement for Request your reference number or book a video appointment to get access to your eVisa"
+    "header": "Accessibility statement for Request your reference number to get access to your eVisa"
   }
 }
