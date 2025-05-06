@@ -1,19 +1,4 @@
 {
-    "identity": {
-        "legend": "Do you have a valid passport?",
-        "hint": "To be valid, the passport expiry date must be in the future.",
-        "options": {
-            "yes": {
-                "label": "Yes"
-            },
-            "no": {
-                "label": "No"
-            }
-        }
-    },
-    "identity-reason": {
-        "label": "Tell us why you do not have a valid passport"
-    },
     "given-names": {
         "label": "Given names",
         "hint": "Your first and middle names"

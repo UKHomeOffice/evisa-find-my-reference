@@ -52,12 +52,6 @@
       }
     },
     "fields": {
-      "identity": {
-        "label": "Have passport"
-      },
-      "identity-reason": {
-        "label": "Reason why you do not have a valid passport"
-      },
       "given-names": {
         "label": "Your name"
       },

@@ -1,11 +1,4 @@
 {
-    "identity": {
-        "required": "Select if you have a valid passport"
-    },
-    "identity-reason": {
-        "required": "Enter a reason why you do not have a valid passport",
-        "maxlength": "You have exceeded the 500 character limit"
-    },
     "given-names": {
         "validateText": "Given names must only include letters a to z, spaces, hyphens and apostrophes"
     },

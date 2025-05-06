@@ -4,14 +4,6 @@ module.exports = {
   'personal-details': {
     steps: [
       {
-        step: '/identity',
-        field: 'identity'
-      },
-      {
-        step: '/identity-reason',
-        field: 'identity-reason'
-      },
-      {
         step: '/name',
         field: 'given-names'
       },

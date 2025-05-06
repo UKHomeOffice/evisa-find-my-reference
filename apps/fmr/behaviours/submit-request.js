@@ -52,9 +52,6 @@ module.exports = superclass => class extends superclass {
         given_names: req.sessionModel.get('given-names') ?
           req.sessionModel.get('given-names') : '',
         surname: req.sessionModel.get('surname'),
-        identity: getLabel('identity', req.sessionModel.get('identity')),
-        has_identity_reason: req.sessionModel.get('identity') === 'no' ? 'yes' : 'no',
-        identity_reason: req.sessionModel.get('identity') === 'no' ? req.sessionModel.get('identity-reason') : '',
         date_of_birth: formatDate(req.sessionModel.get('dob')),
         nationality: req.sessionModel.get('country-of-nationality'),
         sex: getLabel('sex', req.sessionModel.get('sex')),

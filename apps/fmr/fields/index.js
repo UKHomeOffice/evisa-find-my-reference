@@ -22,33 +22,6 @@ function validateText(value) {
 }
 
 module.exports = {
-  identity: {
-    isPageHeading: true,
-    mixin: 'radio-group',
-    validate: ['required'],
-    options: [
-      {
-        value: 'yes'
-      },
-      {
-        value: 'no'
-      }
-    ],
-    className: ['govuk-radios', 'govuk-radios--inline'],
-    legend: {
-      className: 'govuk-!-margin-bottom-6'
-    }
-  },
-  'identity-reason': {
-    isPageHeading: true,
-    mixin: 'textarea',
-    validate: [
-      'required',
-      { type: 'maxlength', arguments: 500 }
-    ],
-    attributes: [{ attribute: 'rows', value: 5 }],
-    labelClassName: 'govuk-!-margin-bottom-6'
-  },
   'given-names': {
     mixin: 'input-text',
     validate: [validateText],
