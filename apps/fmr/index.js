@@ -90,7 +90,9 @@ const steps = {
   '/request-sent': {
     clearSession: true,
     backLink: false
-  }
+  },
+  '/session-timeout': {},
+  '/exit': {}
 };
 
 const pages = {
