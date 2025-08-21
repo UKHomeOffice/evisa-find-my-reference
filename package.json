@@ -12,7 +12,7 @@
     "build": "hof-build",
     "postinstall": "hof-build",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
-    "test:unit": "jest --verbose --testPathPattern=test/unit"
+    "test:unit": "jest --verbose test/unit"
   },
   "repository": {
     "type": "git",
