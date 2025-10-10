@@ -915,9 +915,9 @@
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/node@*":
-  version "24.7.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.7.0.tgz#a34c9f0d3401db396782e440317dd5d8373c286f"
-  integrity sha512-IbKooQVqUBrlzWTi79E8Fw78l8k1RNtlDDNWsFZs7XonuQSJ8oNYfEeclhprUldXISRMLzBpILuKgPlIxm+/Yw==
+  version "24.7.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.7.1.tgz#3f0b17eddcd965c9e337af22459b04bafbf96e5e"
+  integrity sha512-CmyhGZanP88uuC5GpWU9q+fI61j2SkhO3UGMUdfYRE6Bcy0ccyzn1Rqj9YAB/ZY4kOXmNf0ocah5GtphmLMP6Q==
   dependencies:
     undici-types "~7.14.0"
 
@@ -1463,9 +1463,9 @@ base64-js@^1.0.2, base64-js@^1.3.1:
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
 baseline-browser-mapping@^2.8.9:
-  version "2.8.14"
-  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.8.14.tgz#b73b0ae23efcb967e30b381c09a1a001777ec927"
-  integrity sha512-GM9c0cWWR8Ga7//Ves/9KRgTS8nLausCkP3CGiFLrnwA2CDUluXgaQqvrULoR2Ujrd/mz/lkX87F5BHFsNr5sQ==
+  version "2.8.16"
+  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.8.16.tgz#e17789673e7f4b7654f81ab2ef25e96ab6a895f9"
+  integrity sha512-OMu3BGQ4E7P1ErFsIPpbJh0qvDudM/UuJeHgkAvfWe+0HFJCXh+t/l8L6fVLR55RI/UbKrVLnAXZSVwd9ysWYw==
 
 basic-auth@~2.0.1:
   version "2.0.1"
@@ -2429,9 +2429,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.5.227:
-  version "1.5.233"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.233.tgz#05db98476cee317527d6c48934571e13ad6b6f58"
-  integrity sha512-iUdTQSf7EFXsDdQsp8MwJz5SVk4APEFqXU/S47OtQ0YLqacSwPXdZ5vRlMX3neb07Cy2vgioNuRnWUXFwuslkg==
+  version "1.5.234"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.234.tgz#d895b6dba84269f4e83b3a1149dcc55e27848c30"
+  integrity sha512-RXfEp2x+VRYn8jbKfQlRImzoJU01kyDvVPBmG39eU2iuRVhuS6vQNocB8J0/8GrIMLnPzgz4eW6WiRnJkTuNWg==
 
 elliptic@^6.5.3, elliptic@^6.6.1:
   version "6.6.1"
@@ -4555,9 +4555,9 @@ levn@^0.4.1:
     type-check "~0.4.0"
 
 libphonenumber-js@^1.9.44:
-  version "1.12.23"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.12.23.tgz#b838c1e93907ca200395bdb6b06e123c6558f0fd"
-  integrity sha512-RN3q3gImZ91BvRDYjWp7ICz3gRn81mW5L4SW+2afzNCC0I/nkXstBgZThQGTE3S/9q5J90FH4dP+TXx8NhdZKg==
+  version "1.12.24"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.12.24.tgz#deb04b96084a74b4d68d8c2cde816f15e387cfdb"
+  integrity sha512-l5IlyL9AONj4voSd7q9xkuQOL4u8Ty44puTic7J88CmdXkxfGsRfoVLXHCxppwehgpb/Chdb80FFehHqjN3ItQ==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
