@@ -151,7 +151,6 @@ steps:
     <<: *sonar_scanner
     when:
       branch:
-        include:
         <<: *include_default_and_feature_branches
       event: [push, pull_request]
 
@@ -167,7 +166,6 @@ steps:
         path: /var/run
     when:
       branch:
-        include:
         <<: *include_default_and_feature_branches
       event: [push, pull_request]
     depends_on:
@@ -189,7 +187,6 @@ steps:
         - ${DRONE_COMMIT_SHA}
     when:
       branch:
-        include:
         <<: *include_default_and_feature_branches
       event: [push, pull_request]
     depends_on:
