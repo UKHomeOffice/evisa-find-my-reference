@@ -414,7 +414,7 @@ steps:
     when:
       cron: security_scans
       event: cron
-        status:
+      status:
         - success
         - failure
     depends_on:
