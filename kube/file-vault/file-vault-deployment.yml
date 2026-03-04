@@ -189,6 +189,7 @@ spec:
             - --enable-request-id=true
             - --enable-logging=true
             - --enable-json-logging=true
+            - --enable-encrypted-token=false
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
@@ -206,8 +207,7 @@ spec:
               readOnly: true
 
         - name: nginx-proxy
-          # nginx-proxy-govuk:v4
-          image: quay.io/ukhomeofficedigital/nginx-proxy-govuk@sha256:4470064d0b1d20ae08c5fd85551576cb687f342a22d6cb456fda9b2c4ce8c8df
+          image: quay.io/ukhomeofficedigital/nginx-proxy:v.4.4.7@sha256:0c58dabb1df4b4ad4bf1c6ed4ee1e81e440384e0ea41399c568aeb79e627b8ac
           resources:
             limits:
               memory: 1024Mi
