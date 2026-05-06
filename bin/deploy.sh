@@ -17,13 +17,9 @@ kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 redis_storage_files='kube/redis/redis-persistent-volume-claim.yml'
 redis_runtime_files='kube/redis/redis-service.yml -f kube/redis/redis-network-policy.yml -f kube/redis/redis-deployment.yml'
 
-sanitize_branch_name() {
-  echo "$1" | tr '[:upper:]' '[:lower:]' | tr '/' '-'
-}
-
 if [[ $1 == 'tear_down' ]]; then
   export KUBE_NAMESPACE=$BRANCH_ENV
-  export DRONE_SOURCE_BRANCH=$(sanitize_branch_name "$(cat /root/.dockersock/branch_name.txt)")
+  export DRONE_SOURCE_BRANCH=$(cat /root/.dockersock/branch_name.txt)
 
   $kd --delete -f kube/configmaps/configmap.yml
   $kd --delete -f kube/redis -f kube/app
@@ -32,7 +28,7 @@ if [[ $1 == 'tear_down' ]]; then
 fi
 
 export KUBE_NAMESPACE=$1
-export DRONE_SOURCE_BRANCH=$(sanitize_branch_name "$DRONE_SOURCE_BRANCH")
+export DRONE_SOURCE_BRANCH=$(echo $DRONE_SOURCE_BRANCH | tr '[:upper:]' '[:lower:]' | tr '/' '-')
 
 if [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   export REDIS_PERSISTENCE_ENABLED=true
