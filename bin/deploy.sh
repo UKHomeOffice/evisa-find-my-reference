@@ -17,6 +17,46 @@ kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 redis_storage_files='kube/redis/redis-persistent-volume-claim.yml'
 redis_runtime_files='kube/redis/redis-service.yml -f kube/redis/redis-network-policy.yml -f kube/redis/redis-deployment.yml'
 
+recreate_redis_pvc_if_image_changed() {
+  if [[ ${REDIS_PERSISTENCE_ENABLED} != true ]]; then
+    return
+  fi
+
+  if [[ -n "${REDIS_PERSISTENCE_EXISTING_CLAIM}" ]]; then
+    return
+  fi
+
+  current_redis_image=$($kubectl get deployment redis -o jsonpath='{.spec.template.spec.containers[?(@.name=="redis")].image}' 2>/dev/null || true)
+  desired_redis_image=$(grep -m1 '^[[:space:]]*image:' kube/redis/redis-deployment.yml | awk '{print $2}')
+
+  if [[ -n "${current_redis_image}" && -n "${desired_redis_image}" && "${current_redis_image}" != "${desired_redis_image}" ]]; then
+    redis_claim_name='redis-pvc'
+    echo "Redis image changed (${current_redis_image} -> ${desired_redis_image}), recreating ${redis_claim_name}"
+
+    $kubectl delete deployment redis --ignore-not-found=true
+
+    while $kubectl get pods -l app=redis --no-headers 2>/dev/null | grep -q .; do
+      sleep 2
+    done
+
+    $kubectl delete pvc "${redis_claim_name}" --ignore-not-found=true
+
+    wait_count=0
+    while $kubectl get pvc "${redis_claim_name}" >/dev/null 2>&1; do
+      wait_count=$((wait_count + 1))
+      if [[ ${wait_count} -ge 30 ]]; then
+        echo "Timed out waiting for ${redis_claim_name} deletion"
+        exit 1
+      fi
+      sleep 2
+    done
+
+    $kd -f $redis_storage_files
+    $kd -f kube/redis/redis-deployment.yml
+    $kubectl rollout status deployment/redis --timeout=180s
+  fi
+}
+
 if [[ $1 == 'tear_down' ]]; then
   export KUBE_NAMESPACE=$BRANCH_ENV
   export DRONE_SOURCE_BRANCH=$(cat /root/.dockersock/branch_name.txt)
@@ -29,6 +69,7 @@ fi
 
 export KUBE_NAMESPACE=$1
 export DRONE_SOURCE_BRANCH=$(echo $DRONE_SOURCE_BRANCH | tr '[:upper:]' '[:lower:]' | tr '/' '-')
+export kubectl="kubectl --insecure-skip-tls-verify --server=$KUBE_SERVER --namespace=$KUBE_NAMESPACE --token=$KUBE_TOKEN"
 
 if [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   export REDIS_PERSISTENCE_ENABLED=true
@@ -49,6 +90,7 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml
   $kd -f kube/file-vault -f kube/app
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
+  recreate_redis_pvc_if_image_changed
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/app/networkpolicy-internal.yml -f kube/app/ingress-internal.yml
@@ -56,6 +98,7 @@ elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f $redis_storage_files
   $kd -f $redis_runtime_files -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
+  recreate_redis_pvc_if_image_changed
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/app/networkpolicy-external.yml -f kube/app/ingress-external.yml
