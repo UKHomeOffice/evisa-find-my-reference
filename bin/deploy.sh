@@ -30,30 +30,13 @@ recreate_redis_pvc_if_image_changed() {
   desired_redis_image=$(grep -m1 '^[[:space:]]*image:' kube/redis/redis-deployment.yml | awk '{print $2}')
 
   if [[ -n "${current_redis_image}" && -n "${desired_redis_image}" && "${current_redis_image}" != "${desired_redis_image}" ]]; then
-    redis_claim_name='redis-pvc'
-    echo "Redis image changed (${current_redis_image} -> ${desired_redis_image}), recreating ${redis_claim_name}"
+    echo "Redis image changed (${current_redis_image} -> ${desired_redis_image}), recycling redis deployment while preserving PVC"
 
     $kubectl delete deployment redis --ignore-not-found=true
 
     while $kubectl get pods -l app=redis --no-headers 2>/dev/null | grep -q .; do
       sleep 2
     done
-
-    $kubectl delete pvc "${redis_claim_name}" --ignore-not-found=true
-
-    wait_count=0
-    while $kubectl get pvc "${redis_claim_name}" >/dev/null 2>&1; do
-      wait_count=$((wait_count + 1))
-      if [[ ${wait_count} -ge 30 ]]; then
-        echo "Timed out waiting for ${redis_claim_name} deletion"
-        exit 1
-      fi
-      sleep 2
-    done
-
-    $kd -f $redis_storage_files
-    $kd -f kube/redis/redis-deployment.yml
-    $kubectl rollout status deployment/redis --timeout=180s
   fi
 }
 
