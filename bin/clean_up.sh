@@ -24,3 +24,10 @@ do
     $kubectl delete configmap "$each"
   fi
 done
+
+for each in $($kubectl get pvc -o jsonpath="{.items[*].metadata.name}");
+do
+  if [[ ${each} == redis-pvc* ]]; then
+    $kubectl delete pvc "$each"
+  fi
+done

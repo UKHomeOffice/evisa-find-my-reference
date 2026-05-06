@@ -17,6 +17,11 @@ environment:
   NON_PROD_AVAILABILITY: Mon-Fri 08:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
   NOTIFY_STUB: stub
+  REDIS_PERSISTENCE_ENABLED: "false"
+  REDIS_PERSISTENCE_ACCESS_MODES: ReadWriteOnce
+  REDIS_PERSISTENCE_STORAGE_CLASS: gp2-encrypted-eu-west-2b
+  REDIS_PERSISTENCE_EXISTING_CLAIM: ""
+  REDIS_PERSISTENCE_ANNOTATIONS_FILE: ""
 
 include_default_branch: &include_default_branch
   include:
@@ -48,7 +53,7 @@ unit_tests: &unit_tests
     - yarn run test:unit
 
 sonar_scanner: &sonar_scanner
-  pull: if-not-exists
+  pull: always
   image: quay.io/ukhomeofficedigital/sonar-scanner:latest
   commands:
     - sonar-scanner -Dproject.settings=./sonar-project.properties
@@ -305,6 +310,8 @@ steps:
         from_secret: kube_server_prod
       KUBE_TOKEN:
         from_secret: kube_token_prod
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: 1Gi
     commands:
       - bin/deploy.sh $${STG_ENV}
     when:
@@ -353,6 +360,8 @@ steps:
         from_secret: kube_server_prod
       KUBE_TOKEN:
         from_secret: kube_token_prod
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: 5Gi
     commands:
       - bin/deploy.sh $${PROD_ENV}
     when:
