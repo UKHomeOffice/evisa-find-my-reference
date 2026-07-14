@@ -1,21 +1,10 @@
 import { DataTable } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
-import { test } from '../fixture/fixtures';
-import type { Pages } from '../fixture/fixtures';
+import { test, Pages } from '../fixture/fixtures';
 import { ConstantsLib as c } from '../utility-helper/constants-lib';
 
 export const { Given, When, Then } = createBdd(test);
-
-// const completeHomePage = async (pages: Pages) => {
-//   await pages.fmrHomePage.completeHomePage();
-
-//   expect(await pages.fmrHomePage.getUrlForLinkText('Biometric residence permits (BRPs)')).toBe(c.BIOMETRIC_RESIDENCE_PERMITS_URL);
-//   expect(await pages.fmrHomePage.getUrlForLinkText('Update your UK Visas and Immigration account details')).toBe(c.UPDATE_UK_VISAS_AND_IMMIGRATION_ACCOUNT_DETAILS_URL);
-//   expect(await pages.fmrHomePage.getUrlForLinkText('View and prove your immigration status: get a share code')).toBe(c.VIEW_AND_PROVE_YOUR_IMMIGRATION_STATUS_URL);
-//   expect(await pages.fmrHomePage.getUrlForLinkText('get access to your eVisa')).toBe(c.GET_ACCESS_TO_EVISA_URL);
-// };
-
 
 Given('I visit the Find my reference page', async ({ pages }) => {
     await pages.fmrHomePage.openFmrHomepage();

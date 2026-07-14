@@ -43,7 +43,6 @@ export class fmrHomePage extends basePage {
         expect(await this.getUrlForLinkText('Biometric residence permits (BRPs)')).toBe('https://www.gov.uk/biometric-residence-permits');
         expect(await this.getUrlForLinkText('Update your UK Visas and Immigration account details')).toBe('https://www.gov.uk/update-uk-visas-immigration-account-details');
         expect(await this.getUrlForLinkText('View and prove your immigration status: get a share code')).toBe('https://www.gov.uk/view-prove-immigration-status');
-        // expect(await this.getUrlForLinkText('get access to your eVisa')).toBe('https://www.gov.uk/get-access-evisa');
     }
 
     async completeHomePage() {
