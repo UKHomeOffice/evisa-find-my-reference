@@ -67,11 +67,11 @@ fi
 if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps -f kube/certs
-  $kd -f kube/file-vault -f kube/redis -f kube/app
+  $kd -f kube/file-vault -f $redis_runtime_files -f kube/app
 elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml
-  $kd -f kube/file-vault -f kube/redis -f kube/app
+  $kd -f kube/file-vault -f $redis_runtime_files -f kube/app
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   recreate_redis_pvc_if_image_changed
   $kd -f kube/file-vault/file-vault-ingress.yml
