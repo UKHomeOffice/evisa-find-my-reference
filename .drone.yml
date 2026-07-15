@@ -443,7 +443,7 @@ steps:
       target: PROD
       event: promote
 
-- name: generate_github_app_token_for_clone_prod
+  - name: generate_github_app_token_for_clone_prod
     <<: *github_app_token_step
     environment:
       <<: *github_app_token_secrets_hof
