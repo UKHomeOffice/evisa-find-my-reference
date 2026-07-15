@@ -1,0 +1,5 @@
+e2e-tests
+playwright-report
+test-results
+bin/*.sh
+bin/summarise_playwright_report.js
