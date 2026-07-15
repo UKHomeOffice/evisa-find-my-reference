@@ -6,7 +6,7 @@ require('hof/frontend/themes/gov-uk/client-js');
 const accessibleAutocomplete = require('accessible-autocomplete');
 const config = require('../../config.js');
 
-document.querySelectorAll('.typeahead').forEach(function applyTypeahead(element) {
+document.querySelectorAll('.autocomplete').forEach(function applyAutocomplete(element) {
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue: '',
     selectElement: element

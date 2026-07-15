@@ -44,7 +44,7 @@ module.exports = {
   },
   'country-of-nationality': {
     mixin: 'select',
-    className: ['typeahead'],
+    className: ['autocomplete'],
     labelClassName: 'govuk-!-margin-bottom-4',
     validate: ['required'],
     options: [{
