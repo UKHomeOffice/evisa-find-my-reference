@@ -24,7 +24,14 @@ export class basePage {
     }
 
     async type(locator: Locator, text: string) {
-        await locator.fill(text);
+        const tagName = await locator.evaluate(element => element.tagName.toLowerCase());
+
+        if (tagName === 'select') {
+            await locator.selectOption({ label: text });
+        } else {
+            await locator.fill(text);
+        }
+
         await this.page.keyboard.press('Tab');
     }
 
