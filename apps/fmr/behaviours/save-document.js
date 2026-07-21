@@ -6,14 +6,18 @@ const Model = require('../models/file-upload');
 const { sanitiseFilename } = require('../../../utils');
 
 module.exports = (documentCategory, fieldName) => superclass => class extends superclass {
-  configure(req) {
-    req.form.values[documentCategory] = req.sessionModel.get(documentCategory) || [];
-    return super.configure.apply(this, arguments);
+  locals(req, res) {
+    const localVars = super.locals(req, res);
+    localVars.values = localVars.values || {};
+    localVars.values[documentCategory] = req.sessionModel.get(documentCategory) || [];
+    return localVars;
   }
 
   process(req) {
     if (req.files && req.files[fieldName]) {
-      req.form.values[fieldName] = req.files[fieldName].name;
+      if (req.form && req.form.values) {
+        req.form.values[fieldName] = req.files[fieldName].name;
+      }
       req.log('info', `Processing field ${fieldName} with value: ${sanitiseFilename(req.files[fieldName].name)}`);
     }
     super.process.apply(this, arguments);
@@ -72,7 +76,9 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
         await model.save();
         const updatedDocuments = [...documentsByCategory, model.toJSON()];
         req.sessionModel.set(documentCategory, updatedDocuments);
-        req.form.values[documentCategory] = updatedDocuments;
+        if (req.form && req.form.values) {
+          req.form.values[documentCategory] = updatedDocuments;
+        }
         return res.redirect(`${req.baseUrl}${req.path}`);
       } catch (error) {
         return next(new Error(`Failed to save document: ${error}`));
