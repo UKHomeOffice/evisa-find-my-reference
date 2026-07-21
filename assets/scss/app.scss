@@ -1,13 +1,12 @@
 @use 'autocomplete';
 @use 'file-upload';
-@import "./autocomplete.scss";
 
 @import "hof/frontend/themes/gov-uk/styles/govuk";
 
 h2 {
   @extend .govuk-heading-m;
   margin-top: 40px;
-}
+} 
 
 h3 {
   @extend .govuk-heading-s;
