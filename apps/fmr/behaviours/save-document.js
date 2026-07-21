@@ -8,8 +8,10 @@ const { sanitiseFilename } = require('../../../utils');
 module.exports = (documentCategory, fieldName) => superclass => class extends superclass {
   locals(req, res) {
     const localVars = super.locals(req, res);
+    const documentsByCategory = req.sessionModel.get(documentCategory) || [];
     localVars.values = localVars.values || {};
-    localVars.values[documentCategory] = req.sessionModel.get(documentCategory) || [];
+    localVars.values[documentCategory] = documentsByCategory;
+    localVars.values.identityDocuments = documentsByCategory;
     return localVars;
   }
 
@@ -78,6 +80,7 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
         req.sessionModel.set(documentCategory, updatedDocuments);
         if (req.form && req.form.values) {
           req.form.values[documentCategory] = updatedDocuments;
+          req.form.values.identityDocuments = updatedDocuments;
         }
         return res.redirect(`${req.baseUrl}${req.path}`);
       } catch (error) {
