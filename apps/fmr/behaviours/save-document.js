@@ -6,7 +6,7 @@ const Model = require('../models/file-upload');
 const { sanitiseFilename } = require('../../../utils');
 
 module.exports = (documentCategory, fieldName) => superclass => class extends superclass {
-  configure(req, res, next) {
+  configure(req) {
     req.form.values[documentCategory] = req.sessionModel.get(documentCategory) || [];
     return super.configure.apply(this, arguments);
   }
