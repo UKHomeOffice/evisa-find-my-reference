@@ -19,7 +19,27 @@ export class fmrWhatIsYourCountryOfNationalityPage extends basePage {
 
     async completeWhatIsYourCountryOfNationalityPage(nationalityValue: string) {
         await this.assertPageTitle(this.page, await this.expectedPageTitle());
-        await this.type(this.countryOfNationalityField, nationalityValue);
+
+        const nationality = nationalityValue.trim().toLowerCase();
+        const hasMatchingOption = await this.countryOfNationalityField.evaluate((element, value) => {
+            const selectElement = element as HTMLSelectElement;
+
+            return Array.from(selectElement.options).some(option => {
+                return option.text.trim().toLowerCase() === value || option.value.trim().toLowerCase() === value;
+            });
+        }, nationality);
+
+        if (hasMatchingOption) {
+            await this.type(this.countryOfNationalityField, nationalityValue);
+        } else {
+            const autocompleteInput = this.page.locator('.autocomplete__input').first();
+
+            if (await autocompleteInput.isVisible().catch(() => false)) {
+                await autocompleteInput.fill(nationalityValue);
+                await this.page.keyboard.press('Tab');
+            }
+        }
+
         await this.clickContinueButton();
     }
 }

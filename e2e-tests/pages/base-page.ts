@@ -24,6 +24,18 @@ export class basePage {
     }
 
     async type(locator: Locator, text: string) {
+        const tagName = await locator.evaluate(element => element.tagName.toLowerCase());
+
+        if (tagName === 'select') {
+            const selected = await locator.selectOption([{ label: text }, { value: text }]);
+
+            if (selected.length === 0) {
+                throw new Error(`Unable to select option "${text}" from select element`);
+            }
+
+            return;
+        }
+
         await locator.fill(text);
         await this.page.keyboard.press('Tab');
     }
