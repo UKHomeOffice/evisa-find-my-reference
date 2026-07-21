@@ -28,8 +28,8 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
     const validationErrorFunc = (type, args) => new this.ValidationError(key, { type: type, arguments: [args] });
 
-    // To check required type, when trying to do continue without upload
-    if (req.body.continueWithoutUpload && documentsByCategory.length === 0) {
+    // Only raise required when continuing without an existing or newly selected file.
+    if (req.body.continueWithoutUpload && documentsByCategory.length === 0 && !fileToBeValidated) {
       return validationErrorFunc('required');
     } else if (fileToBeValidated) {
       const uploadSize = fileToBeValidated.size;
