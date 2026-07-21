@@ -6,6 +6,11 @@ const Model = require('../models/file-upload');
 const { sanitiseFilename } = require('../../../utils');
 
 module.exports = (documentCategory, fieldName) => superclass => class extends superclass {
+  configure(req, res, next) {
+    req.form.values[documentCategory] = req.sessionModel.get(documentCategory) || [];
+    return super.configure.apply(this, arguments);
+  }
+
   process(req) {
     if (req.files && req.files[fieldName]) {
       req.form.values[fieldName] = req.files[fieldName].name;
@@ -65,7 +70,9 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
 
       try {
         await model.save();
-        req.sessionModel.set(documentCategory, [...documentsByCategory, model.toJSON()]);
+        const updatedDocuments = [...documentsByCategory, model.toJSON()];
+        req.sessionModel.set(documentCategory, updatedDocuments);
+        req.form.values[documentCategory] = updatedDocuments;
         return res.redirect(`${req.baseUrl}${req.path}`);
       } catch (error) {
         return next(new Error(`Failed to save document: ${error}`));

@@ -20,7 +20,6 @@ export class fmrWhatIsYourCountryOfNationalityPage extends basePage {
     async completeWhatIsYourCountryOfNationalityPage(nationalityValue: string) {
         await this.assertPageTitle(this.page, await this.expectedPageTitle());
         await this.type(this.countryOfNationalityField, nationalityValue);
-
         await this.clickContinueButton();
     }
 }
