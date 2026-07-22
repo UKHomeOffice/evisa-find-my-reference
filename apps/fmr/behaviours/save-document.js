@@ -33,7 +33,7 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     if (!fileToBeValidated) {
       // Continue is valid once a document has already been uploaded in this session.
       if (documentsByCategory.length > 0) {
-        return;
+        return undefined;
       }
 
       // Block continue when no upload exists yet.
