@@ -30,9 +30,16 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
     const validationErrorFunc = (type, args) => new this.ValidationError(key, { type: type, arguments: [args] });
 
-    // Only raise required when continuing without an existing or newly selected file.
-    if (req.body.continueWithoutUpload && documentsByCategory.length === 0 && !fileToBeValidated) {
-      return validationErrorFunc('required');
+    if (!fileToBeValidated) {
+      // Continue is valid once a document has already been uploaded in this session.
+      if (documentsByCategory.length > 0) {
+        return;
+      }
+
+      // Block continue when no upload exists yet.
+      if (req.body.continueWithoutUpload) {
+        return validationErrorFunc('required');
+      }
     } else if (fileToBeValidated) {
       const uploadSize = fileToBeValidated.size;
       const mimetype = fileToBeValidated.mimetype;
@@ -82,6 +89,16 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
           req.form.values[documentCategory] = updatedDocuments;
           req.form.values.identityDocuments = updatedDocuments;
         }
+
+        if (req.session && typeof req.session.save === 'function') {
+          return req.session.save(error => {
+            if (error) {
+              return next(error);
+            }
+            return res.redirect(`${req.baseUrl}${req.path}`);
+          });
+        }
+
         return res.redirect(`${req.baseUrl}${req.path}`);
       } catch (error) {
         return next(new Error(`Failed to save document: ${error}`));
