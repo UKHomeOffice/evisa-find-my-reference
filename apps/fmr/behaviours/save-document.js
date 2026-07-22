@@ -10,6 +10,7 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     const localVars = super.locals(req, res);
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
     localVars.values = localVars.values || {};
+    localVars.identityDocuments = documentsByCategory;
     localVars.values[documentCategory] = documentsByCategory;
     localVars.values.identityDocuments = documentsByCategory;
     return localVars;
