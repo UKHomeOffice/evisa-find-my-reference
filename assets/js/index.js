@@ -82,12 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (uploadForm) {
           fileUploadStatusHandler('uploading');
-
-          if (typeof uploadForm.requestSubmit === 'function') {
-            uploadForm.requestSubmit();
-            return;
-          }
-
           uploadForm.submit();
         }
       }
