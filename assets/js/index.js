@@ -50,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case 'uploading':
         uploadPageLoaderContainer.style.display = 'flex';
-        fileUpload.disabled = true;
-        fileUpload.ariaDisabled = true;
         continueWithoutUpload.forEach(a => {
           a.disabled = true;
           a.ariaDisabled = true;
@@ -80,20 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        const continueButton = continueWithoutUpload && continueWithoutUpload.length > 0
-          ? continueWithoutUpload[0]
+        const uploadForm = fileUpload.form || document.querySelector('form[name="file-upload-form"]');
+        const continueButton = uploadForm
+          ? uploadForm.querySelector('button[name="continueWithoutUpload"]')
           : null;
 
-        if (continueButton) {
-          continueButton.click();
+        if (uploadForm && continueButton && typeof uploadForm.requestSubmit === 'function') {
           fileUploadStatusHandler('uploading');
+          uploadForm.requestSubmit(continueButton);
           return;
         }
 
-        const uploadForm = fileUpload.form || document.querySelector('form[name="file-upload-form"]');
-        if (uploadForm) {
-          uploadForm.submit();
+        if (continueButton) {
           fileUploadStatusHandler('uploading');
+          continueButton.click();
+          return;
+        }
+
+        if (uploadForm) {
+          fileUploadStatusHandler('uploading');
+          uploadForm.submit();
         }
       }
     });
