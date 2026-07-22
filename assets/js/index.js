@@ -79,24 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const uploadForm = fileUpload.form || document.querySelector('form[name="file-upload-form"]');
-        const continueButton = uploadForm
-          ? uploadForm.querySelector('button[name="continueWithoutUpload"]')
-          : null;
-
-        if (uploadForm && continueButton && typeof uploadForm.requestSubmit === 'function') {
-          fileUploadStatusHandler('uploading');
-          uploadForm.requestSubmit(continueButton);
-          return;
-        }
-
-        if (continueButton) {
-          fileUploadStatusHandler('uploading');
-          continueButton.click();
-          return;
-        }
 
         if (uploadForm) {
           fileUploadStatusHandler('uploading');
+
+          if (typeof uploadForm.requestSubmit === 'function') {
+            uploadForm.requestSubmit();
+            return;
+          }
+
           uploadForm.submit();
         }
       }
