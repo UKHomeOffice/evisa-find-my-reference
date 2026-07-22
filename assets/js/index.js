@@ -80,8 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        document.querySelector('[name=file-upload-form]').submit();
-        fileUploadStatusHandler('uploading');
+        const uploadForm = fileUpload.form || document.querySelector('form[name="file-upload-form"]');
+
+        if (uploadForm) {
+          uploadForm.submit();
+          fileUploadStatusHandler('uploading');
+        }
       }
     });
   }

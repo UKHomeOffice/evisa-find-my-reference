@@ -37,10 +37,8 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
         return undefined;
       }
 
-      // Block continue when no upload exists yet.
-      if (req.body.continueWithoutUpload) {
-        return validationErrorFunc('required');
-      }
+      // Never advance on POST without a selected file when none exist yet.
+      return validationErrorFunc('required');
     } else if (fileToBeValidated) {
       const uploadSize = fileToBeValidated.size;
       const mimetype = fileToBeValidated.mimetype;
@@ -64,8 +62,12 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
       } else if (isDuplicateFile) {
         return validationErrorFunc('isDuplicateFileName', [req.files[fieldName].name]);
       }
+
+      // A valid selected file should proceed straight to saveValues.
+      return undefined;
     }
-    return super.validateField(key, req);
+
+    return undefined;
   }
 
   async saveValues(req, res, next) {
