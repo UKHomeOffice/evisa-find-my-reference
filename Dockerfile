@@ -2,10 +2,7 @@ FROM node:24.18.0-alpine3.24@sha256:4ba75f835bb8802193e4c114572113d4b26f95f6f094
 
 USER root
 
-# Use official Alpine CDN mirrors over HTTPS, then refresh index and upgrade packages.
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.24/main" > /etc/apk/repositories ; \
-    echo "https://dl-cdn.alpinelinux.org/alpine/v3.24/community" >> /etc/apk/repositories ; \
-    apk update && apk upgrade --no-cache
+# Rely on the pinned base image digest to avoid flaky network-dependent apk upgrade steps in CI.
 
 # Setup nodejs group & nodejs user
 RUN addgroup --system nodejs --gid 998 && \
