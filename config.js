@@ -2,6 +2,7 @@
 /* eslint no-process-env: 0 */
 
 const env = process.env.NODE_ENV || 'production';
+const fileUploadConfig = require('./assets/js/file-upload-config');
 
 module.exports = {
   dateLocales: 'en-GB',
@@ -23,21 +24,8 @@ module.exports = {
     host: process.env.REDIS_HOST || '127.0.0.1'
   },
   upload: {
-    maxFileSizeInBytes: 20 * 1024 * 1024, // 20MiB in bytes
-    hostname: process.env.FILE_VAULT_URL,
-    allowedMimeTypes: [
-      'image/jpeg',
-      'image/jpg',
-      'image/png',
-      'image/gif',
-      'application/pdf'
-    ],
-    documentCategories: {
-      'identity-documents': {
-        limit: 1,
-        limitValidationError: 'maxIdDocsUploads'
-      }
-    }
+    ...fileUploadConfig,
+    hostname: process.env.FILE_VAULT_URL
   },
   aws: {
     bucket: process.env.AWS_BUCKET,
