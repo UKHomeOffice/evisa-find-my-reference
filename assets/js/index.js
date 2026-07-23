@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case 'uploading':
         uploadPageLoaderContainer.style.display = 'flex';
+        fileUpload.disabled = true;
+        fileUpload.ariaDisabled = true;
         continueWithoutUpload.forEach(a => {
           a.disabled = true;
           a.ariaDisabled = true;
@@ -78,12 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        const uploadForm = fileUpload.form || document.querySelector('form[name="file-upload-form"]');
-
-        if (uploadForm) {
-          fileUploadStatusHandler('uploading');
-          uploadForm.submit();
-        }
+        document.querySelector('[name=file-upload-form]').submit();
+        fileUploadStatusHandler('uploading');
       }
     });
   }

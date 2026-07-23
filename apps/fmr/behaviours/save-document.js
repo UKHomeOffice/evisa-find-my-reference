@@ -6,21 +6,9 @@ const Model = require('../models/file-upload');
 const { sanitiseFilename } = require('../../../utils');
 
 module.exports = (documentCategory, fieldName) => superclass => class extends superclass {
-  locals(req, res) {
-    const localVars = super.locals(req, res);
-    const documentsByCategory = req.sessionModel.get(documentCategory) || [];
-    localVars.values = localVars.values || {};
-    localVars.identityDocuments = documentsByCategory;
-    localVars.values[documentCategory] = documentsByCategory;
-    localVars.values.identityDocuments = documentsByCategory;
-    return localVars;
-  }
-
   process(req) {
     if (req.files && req.files[fieldName]) {
-      if (req.form && req.form.values) {
-        req.form.values[fieldName] = req.files[fieldName].name;
-      }
+      req.form.values[fieldName] = req.files[fieldName].name;
       req.log('info', `Processing field ${fieldName} with value: ${sanitiseFilename(req.files[fieldName].name)}`);
     }
     super.process.apply(this, arguments);
@@ -31,13 +19,8 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
     const validationErrorFunc = (type, args) => new this.ValidationError(key, { type: type, arguments: [args] });
 
-    if (!fileToBeValidated) {
-      // Continue is valid once a document has already been uploaded in this session.
-      if (documentsByCategory.length > 0) {
-        return undefined;
-      }
-
-      // Never advance on POST without a selected file when none exist yet.
+    // To check required type, when trying to do continue without upload
+    if (req.body.continueWithoutUpload && documentsByCategory.length === 0) {
       return validationErrorFunc('required');
     } else if (fileToBeValidated) {
       const uploadSize = fileToBeValidated.size;
@@ -62,12 +45,8 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
       } else if (isDuplicateFile) {
         return validationErrorFunc('isDuplicateFileName', [req.files[fieldName].name]);
       }
-
-      // A valid selected file should proceed straight to saveValues.
-      return undefined;
     }
-
-    return undefined;
+    return super.validateField(key, req);
   }
 
   async saveValues(req, res, next) {
@@ -86,22 +65,7 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
 
       try {
         await model.save();
-        const updatedDocuments = [...documentsByCategory, model.toJSON()];
-        req.sessionModel.set(documentCategory, updatedDocuments);
-        if (req.form && req.form.values) {
-          req.form.values[documentCategory] = updatedDocuments;
-          req.form.values.identityDocuments = updatedDocuments;
-        }
-
-        if (req.session && typeof req.session.save === 'function') {
-          return req.session.save(error => {
-            if (error) {
-              return next(error);
-            }
-            return res.redirect(`${req.baseUrl}${req.path}`);
-          });
-        }
-
+        req.sessionModel.set(documentCategory, [...documentsByCategory, model.toJSON()]);
         return res.redirect(`${req.baseUrl}${req.path}`);
       } catch (error) {
         return next(new Error(`Failed to save document: ${error}`));
