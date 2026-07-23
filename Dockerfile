@@ -2,8 +2,7 @@ FROM node:24.18.0-alpine3.24@sha256:4ba75f835bb8802193e4c114572113d4b26f95f6f094
 
 USER root
 
-# Upgrade Alpine packages with latest security and bug fixes
-RUN apk upgrade --no-cache
+# Rely on the pinned base image digest to keep container OS packages deterministic in CI.
 
 # Setup nodejs group & nodejs user
 RUN addgroup --system nodejs --gid 998 && \
