@@ -2,9 +2,6 @@ FROM quay.io/ukhomeofficedigital/hof-nodejs:24.19.0-alpine3.24@sha256:a70b2f29d5
 
 USER root
 
-# Update packages as a result of Trivy security vulnerability checks
-RUN apk upgrade --no-cache
-
 # Setup nodejs group & nodejs user
 RUN addgroup --system nodejs --gid 998 && \
     adduser --system nodejs --uid 999 --home /app/ && \

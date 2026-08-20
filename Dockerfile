@@ -4,9 +4,6 @@ USER root
 
 # Rely on the pinned base image digest to avoid flaky network-dependent apk upgrade steps in CI.
 
-# Upgrade bundled npm deps so Trivy does not report vulnerable undici from base image toolchain
-RUN npm install -g npm@12.0.1 && npm --version
-
 # Setup nodejs group & nodejs user
 RUN addgroup --system nodejs --gid 998 && \
     adduser --system nodejs --uid 999 --home /app/ && \
