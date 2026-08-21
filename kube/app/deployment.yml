@@ -100,7 +100,7 @@ spec:
                 secretKeyRef:
                   name: session-secret
                   key: session-secret
-            - name: HOF_TEST_EMAIL
+            - name: SAS_HOF_EMAIL
               valueFrom:
                 secretKeyRef:
                   name: sas-hof-email
