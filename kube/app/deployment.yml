@@ -100,6 +100,11 @@ spec:
                 secretKeyRef:
                   name: session-secret
                   key: session-secret
+            - name: HOF_TEST_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: sas-hof-email
+                  key: sas-hof-email
             - name: FILE_VAULT_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk/file
