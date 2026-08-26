@@ -9,7 +9,7 @@ export const ConstantsLib = {
   POSTCODE: 'M11 1HH',
   COUNTRY_UK: 'UK',
   TELEPHONE: '01616699548',
-  SAS_HOF_EMAIL: 'sas-hof-test@digital.homeoffice.gov.uk',
+  SAS_HOF_EMAIL: process.env.SAS_HOF_EMAIL || '',
   DOB_1978: '01/01/1978',
   NATIONALITY: 'Spain',
   YESTERDAY_S_DATE: "yesterday's date",
