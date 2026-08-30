@@ -17,27 +17,17 @@ kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 redis_storage_files='kube/redis/redis-persistent-volume-claim.yml'
 redis_runtime_files='kube/redis/redis-service.yml -f kube/redis/redis-network-policy.yml -f kube/redis/redis-deployment.yml'
 
-recreate_redis_pvc_if_image_changed() {
+deploy_redis_pvc_if_enabled() {
   if [[ ${REDIS_PERSISTENCE_ENABLED} != true ]]; then
     return
   fi
 
   if [[ -n "${REDIS_PERSISTENCE_EXISTING_CLAIM}" ]]; then
+    echo "Using existing Redis PVC claim (${REDIS_PERSISTENCE_EXISTING_CLAIM}); skipping PVC deployment"
     return
   fi
 
-  current_redis_image=$($kubectl get deployment redis -o jsonpath='{.spec.template.spec.containers[?(@.name=="redis")].image}' 2>/dev/null || true)
-  desired_redis_image=$(grep -m1 '^[[:space:]]*image:' kube/redis/redis-deployment.yml | awk '{print $2}')
-
-  if [[ -n "${current_redis_image}" && -n "${desired_redis_image}" && "${current_redis_image}" != "${desired_redis_image}" ]]; then
-    echo "Redis image changed (${current_redis_image} -> ${desired_redis_image}), recycling redis deployment while preserving PVC"
-
-    $kubectl delete deployment redis --ignore-not-found=true
-
-    while $kubectl get pods -l app=redis --no-headers 2>/dev/null | grep -q .; do
-      sleep 2
-    done
-  fi
+  $kd -f $redis_storage_files
 }
 
 if [[ $1 == 'tear_down' ]]; then
@@ -73,19 +63,17 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml
   $kd -f kube/file-vault -f $redis_runtime_files -f kube/app
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
-  recreate_redis_pvc_if_image_changed
+  deploy_redis_pvc_if_enabled
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/app/networkpolicy-internal.yml -f kube/app/ingress-internal.yml
   $kd -f kube/app/networkpolicy-external.yml -f kube/app/ingress-external.yml
-  $kd -f $redis_storage_files
   $kd -f $redis_runtime_files -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
-  recreate_redis_pvc_if_image_changed
+  deploy_redis_pvc_if_enabled
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/app/networkpolicy-external.yml -f kube/app/ingress-external.yml
-  $kd -f $redis_storage_files
   $kd -f $redis_runtime_files -f kube/file-vault -f kube/app/deployment.yml
 fi
 
