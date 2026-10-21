@@ -113,7 +113,7 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk/file
+              value: https://fv-{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk/file
             {{ end }}
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - name: DEBUG
