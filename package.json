@@ -4,7 +4,7 @@
   "description": "eVisa Find My Reference",
   "main": "index.js",
   "engines": {
-    "node": ">=24.21.0 <25.0.0"
+    "node": ">=24.22.1 <25.0.0"
   },
   "scripts": {
     "start": "node server.js",
@@ -60,6 +60,8 @@
     "proxy-addr": "^2.0.8",    
     "moment": "^2.31.0",
     "markdown-it": "^14.3.1",
-    "axios": "^1.20.0"
+    "axios": "^1.20.0",
+    "body-parser": "^2.4.0",
+    "follow-redirects": "^1.16.1"
   }
 }
